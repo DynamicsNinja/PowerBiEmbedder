@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Fic.XTB.PowerBiEmbedder</id>
+        <version>1.0.0</version>
+        <title>Power BI Embedder for XrmToolBox</title>
+        <authors>Ivan Ficko</authors>
+        <projectUrl>https://github.com/DynamicsNinja/PowerBiEmbedder</projectUrl>
+        <iconUrl>https://raw.githubusercontent.com/DynamicsNinja/PowerBiEmbedder/master/docs/images/PBE-300.jpg</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>XrmToolBox plugin that allows you to embed the Power BI report into the CDS form.</description>
+        <summary>XrmToolBox plugin that allows you to embed the Power BI report into the CDS form.</summary>
+        <releaseNotes>
+        First public release of Power BI Embedder for XrmToolBox
+        </releaseNotes>
+        <copyright>Copyright 2019 Ivan Ficko</copyright>
+        <tags>XrmToolBox Plugins PowerBiEmbedder</tags>
+        <dependencies>
+            <dependency id="XrmToolBox" version="1.2018.6.25" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\Release\Fic.XTB.PowerBiEmbedder.dll" target="lib\net452\Plugins\Fic.XTB.PowerBiEmbedder.dll" />
+    </files>
+</package>
