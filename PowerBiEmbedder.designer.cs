@@ -133,6 +133,7 @@
             // cmbPbiSettings
             // 
             this.cmbPbiSettings.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPbiSettings.Enabled = false;
             this.cmbPbiSettings.Items.AddRange(new object[] {
             "On",
             "Off"});
@@ -177,6 +178,7 @@
             this.gbTarget.Controls.Add(this.lblForm);
             this.gbTarget.Controls.Add(this.cmbEntity);
             this.gbTarget.Controls.Add(this.lblEntity);
+            this.gbTarget.Enabled = false;
             this.gbTarget.Location = new System.Drawing.Point(3, 3);
             this.gbTarget.Name = "gbTarget";
             this.gbTarget.Size = new System.Drawing.Size(475, 232);
@@ -280,6 +282,7 @@
             this.gbPowerBiConfig.Controls.Add(this.tbReportId);
             this.gbPowerBiConfig.Controls.Add(this.lblReportId);
             this.gbPowerBiConfig.Controls.Add(this.lblGrpId);
+            this.gbPowerBiConfig.Enabled = false;
             this.gbPowerBiConfig.Location = new System.Drawing.Point(484, 3);
             this.gbPowerBiConfig.Name = "gbPowerBiConfig";
             this.gbPowerBiConfig.Size = new System.Drawing.Size(475, 232);
@@ -370,6 +373,7 @@
             this.gbFormatting.Controls.Add(this.lblSectionName);
             this.gbFormatting.Controls.Add(this.tbSectionName);
             this.gbFormatting.Controls.Add(this.tbRowspan);
+            this.gbFormatting.Enabled = false;
             this.gbFormatting.Location = new System.Drawing.Point(3, 241);
             this.gbFormatting.Name = "gbFormatting";
             this.gbFormatting.Size = new System.Drawing.Size(475, 241);

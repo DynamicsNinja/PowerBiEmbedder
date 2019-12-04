@@ -71,6 +71,8 @@ namespace Fic.XTB.PowerBiEmbedder
         private void PowerBiEmbedder_ConnectionUpdated(object sender, ConnectionUpdatedEventArgs e) {
             LogInfo("Connection has changed to: {0}", e.ConnectionDetail.WebApplicationUrl);
 
+            UnlockControls();
+
             tbGrpId.Text = "00000000-0000-0000-0000-000000000000";
             tbReportId.Text = "00000000-0000-0000-0000-000000000000";
             tbPbiUrl.Text = "https://app.powerbi.com";
@@ -345,10 +347,10 @@ namespace Fic.XTB.PowerBiEmbedder
 
             var formEntity = new Entity(oldformEntity.LogicalName, oldformEntity.Id);
             formEntity["formxml"] = _fetchXml;
-            Service.Update(formEntity);
 
             WorkAsync(new WorkAsyncInfo("Publishing report on the form...",
                 (eventargs) => {
+                    Service.Update(formEntity);
                     PublishAllXmlRequest publishallxmlrequest = new PublishAllXmlRequest();
                     Service.Execute(publishallxmlrequest);
                 }) {
@@ -433,6 +435,14 @@ namespace Fic.XTB.PowerBiEmbedder
                 tbPbiUrl.Text = "https://app.powerbi.com";
                 cbxPbiFilter.Checked = false;
             }
+        }
+
+        private void UnlockControls() {
+            gbTarget.Enabled = true;
+            gbFormatting.Enabled = true;
+            gbPowerBiConfig.Enabled = true;
+
+            cmbPbiSettings.Enabled = true;
         }
     }
 }
