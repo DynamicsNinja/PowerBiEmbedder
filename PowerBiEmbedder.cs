@@ -332,6 +332,9 @@ namespace Fic.XTB.PowerBiEmbedder
 
         private void btnPublish_Click(object sender, EventArgs e) {
             var selectedSectionProxy = (SectionProxy)cmbSection.SelectedItem;
+
+            if(selectedSectionProxy == null) { return;}
+
             var selectedSection = selectedSectionProxy.Section;
 
             var sectionXml = GeneratePowerBiSectionXml(selectedSection);
