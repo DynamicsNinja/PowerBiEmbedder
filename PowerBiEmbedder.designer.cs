@@ -143,6 +143,7 @@
             // 
             // errorProvider
             // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
             // 
             // tableLayoutPanel1
@@ -197,6 +198,7 @@
             this.cmbSection.Size = new System.Drawing.Size(322, 24);
             this.cmbSection.TabIndex = 13;
             this.cmbSection.SelectedIndexChanged += new System.EventHandler(this.cmbSection_SelectedIndexChanged);
+            this.cmbSection.Validating += new System.ComponentModel.CancelEventHandler(this.cmbSection_Validating);
             // 
             // lblSection
             // 
@@ -218,6 +220,7 @@
             this.cmbTab.Size = new System.Drawing.Size(322, 24);
             this.cmbTab.TabIndex = 11;
             this.cmbTab.SelectedIndexChanged += new System.EventHandler(this.cmbTab_SelectedIndexChanged);
+            this.cmbTab.Validating += new System.ComponentModel.CancelEventHandler(this.cmbTab_Validating);
             // 
             // lblTab
             // 
@@ -239,6 +242,7 @@
             this.cmbForm.Size = new System.Drawing.Size(322, 24);
             this.cmbForm.TabIndex = 9;
             this.cmbForm.SelectedIndexChanged += new System.EventHandler(this.cmbForm_SelectedIndexChanged);
+            this.cmbForm.Validating += new System.ComponentModel.CancelEventHandler(this.cmbForm_Validating);
             // 
             // lblForm
             // 
@@ -260,6 +264,7 @@
             this.cmbEntity.Size = new System.Drawing.Size(322, 24);
             this.cmbEntity.TabIndex = 7;
             this.cmbEntity.SelectedIndexChanged += new System.EventHandler(this.cmbEntity_SelectedIndexChanged);
+            this.cmbEntity.Validating += new System.ComponentModel.CancelEventHandler(this.cmbEntity_Validating);
             // 
             // lblEntity
             // 
@@ -407,6 +412,7 @@
             this.tbSectionName.Name = "tbSectionName";
             this.tbSectionName.Size = new System.Drawing.Size(322, 22);
             this.tbSectionName.TabIndex = 17;
+            this.tbSectionName.Validating += new System.ComponentModel.CancelEventHandler(this.tbSectionName_Validating);
             // 
             // tbRowspan
             // 
@@ -417,6 +423,7 @@
             this.tbRowspan.Size = new System.Drawing.Size(322, 22);
             this.tbRowspan.TabIndex = 18;
             this.tbRowspan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbRowspan_KeyPress);
+            this.tbRowspan.Validating += new System.ComponentModel.CancelEventHandler(this.tbRowspan_Validating);
             // 
             // gbPbiFilters
             // 
@@ -446,6 +453,7 @@
             this.cmbEntityField.Name = "cmbEntityField";
             this.cmbEntityField.Size = new System.Drawing.Size(338, 24);
             this.cmbEntityField.TabIndex = 14;
+            this.cmbEntityField.Validating += new System.ComponentModel.CancelEventHandler(this.cmbEntityField_Validating);
             // 
             // lblCdsField
             // 

@@ -44,6 +44,8 @@ namespace Fic.XTB.PowerBiEmbedder
             } else {
                 LogInfo("Settings found and loaded");
             }
+
+            this.ActiveControl = cmbEntity;
         }
 
         /// <summary>
@@ -77,7 +79,7 @@ namespace Fic.XTB.PowerBiEmbedder
             tbReportId.Text = "00000000-0000-0000-0000-000000000000";
             tbPbiUrl.Text = "https://app.powerbi.com";
             tbRowspan.Text = "20";
-            cmbEntity.Text = "Select an entity";
+            cmbEntity.Text = "Select an entity";      
 
             cmbEntityField.Enabled = false;
 
@@ -272,10 +274,12 @@ namespace Fic.XTB.PowerBiEmbedder
 
             if(!isValid) {
                 errorProvider.SetError(textbox, "Input is not a valid GUID format.");
-                btnPublish.Enabled = false;
+                e.Cancel = true;
+            }else if (guid == Guid.Empty){
+                errorProvider.SetError(textbox, "Input must not be an enmpty GUID.");
+                e.Cancel = true;
             } else {
                 errorProvider.SetError(textbox, "");
-                btnPublish.Enabled = true;
             }
         }
 
@@ -288,10 +292,9 @@ namespace Fic.XTB.PowerBiEmbedder
 
             if(!isValid && !isEmpty) {
                 errorProvider.SetError(textbox, "Input is not a valid GUID format.");
-                btnPublish.Enabled = false;
+                e.Cancel = true;
             } else {
                 errorProvider.SetError(textbox, "");
-                btnPublish.Enabled = true;
             }
         }
 
@@ -303,6 +306,7 @@ namespace Fic.XTB.PowerBiEmbedder
                 gbPbiFilters.Enabled = false;
                 errorProvider.SetError(tbPbiTable, "");
                 errorProvider.SetError(tbPbiColumn, "");
+                errorProvider.SetError(cmbEntityField, "");
             }
         }
 
@@ -311,10 +315,9 @@ namespace Fic.XTB.PowerBiEmbedder
 
             if(filterActive && tbPbiTable.Text == "") {
                 errorProvider.SetError(tbPbiTable, "Input must not be empty.");
-                btnPublish.Enabled = false;
+                e.Cancel = true;
             } else {
                 errorProvider.SetError(tbPbiTable, "");
-                btnPublish.Enabled = true;
             }
         }
 
@@ -323,17 +326,17 @@ namespace Fic.XTB.PowerBiEmbedder
 
             if(filterActive && tbPbiColumn.Text == "") {
                 errorProvider.SetError(tbPbiColumn, "Input must not be empty.");
-                btnPublish.Enabled = false;
+                e.Cancel = true;
             } else {
                 errorProvider.SetError(tbPbiColumn, "");
-                btnPublish.Enabled = true;
             }
         }
 
         private void btnPublish_Click(object sender, EventArgs e) {
-            var selectedSectionProxy = (SectionProxy)cmbSection.SelectedItem;
+            var isValidForm = ValidateChildren();
+            if (!isValidForm) { return; }
 
-            if(selectedSectionProxy == null) { return;}
+            var selectedSectionProxy = (SectionProxy)cmbSection.SelectedItem;
 
             var selectedSection = selectedSectionProxy.Section;
 
@@ -446,6 +449,80 @@ namespace Fic.XTB.PowerBiEmbedder
             gbPowerBiConfig.Enabled = true;
 
             cmbPbiSettings.Enabled = true;
+
+            btnPublish.Enabled = true;
+        }
+
+        private void cmbEntity_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if(cmbEntity.SelectedItem == null) {
+                errorProvider.SetError(cmbEntity, "You must select entity.");
+                e.Cancel = true;
+            } else {
+                errorProvider.SetError(cmbEntity, "");
+            }
+        }
+
+        private void cmbForm_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (cmbForm.SelectedItem == null){
+                errorProvider.SetError(cmbForm, "You must select form.");
+                e.Cancel = true;
+            }else{
+                errorProvider.SetError(cmbForm, "");
+            }
+        }
+
+        private void cmbTab_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (cmbTab.SelectedItem == null){
+                errorProvider.SetError(cmbTab, "You must select tab.");
+                e.Cancel = true;
+            }else{
+                errorProvider.SetError(cmbTab, "");
+            }
+        }
+
+        private void cmbSection_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (cmbSection.SelectedItem == null){
+                errorProvider.SetError(cmbSection, "You must select section.");
+                e.Cancel = true;
+            }else{
+                errorProvider.SetError(cmbSection, "");
+            }
+        }
+
+        private void tbSectionName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (tbSectionName.Text == ""){
+                errorProvider.SetError(tbSectionName, "Field must contain value.");
+                e.Cancel = true;
+            }else{
+                errorProvider.SetError(tbSectionName, "");
+            }
+        }
+
+        private void tbRowspan_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (tbRowspan.Text == ""){
+                errorProvider.SetError(tbRowspan, "Field must contain value.");
+                e.Cancel = true;
+            }else{
+                errorProvider.SetError(tbRowspan, "");
+            }
+        }
+
+        private void cmbEntityField_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var filterActive = cbxPbiFilter.Checked;
+
+            if (filterActive && cmbEntityField.SelectedItem == null){
+                errorProvider.SetError(cmbEntityField, "Please select entity field.");
+                e.Cancel = true;
+            }else{
+                errorProvider.SetError(cmbEntityField, "");
+            }
         }
     }
 }
