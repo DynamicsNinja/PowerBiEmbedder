@@ -11,15 +11,17 @@
         <description>XrmToolBox plugin that allows you to embed the Power BI report into the CDS form.</description>
         <summary>XrmToolBox plugin that allows you to embed the Power BI report into the CDS form.</summary>
         <releaseNotes>
-        1.2019.12.6
-          - Improved field validation
-	      1.2019.12.5
-		      - Fixed NuGet and DLL version mismatch
-	      1.2019.12.4		
-		      - Fixed crash when running without connection
-		      - Fixed crash when publish is initiated without a section selected
-	      1.2019.12.3
-          - First public release of Power BI Embedder for XrmToolBox
+1.2019.12.7
+- Added edit function for existing reports
+1.2019.12.6
+- Improved field validation
+1.2019.12.5
+- Fixed NuGet and DLL version mismatch
+1.2019.12.4
+- Fixed crash when running without connection
+- Fixed crash when publish is initiated without a section selected
+1.2019.12.3
+- First public release of Power BI Embedder for XrmToolBox
         </releaseNotes>
         <copyright>Copyright 2019 Ivan Ficko</copyright>
         <tags>XrmToolBox Plugins PowerBiEmbedder</tags>

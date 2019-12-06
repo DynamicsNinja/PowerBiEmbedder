@@ -226,13 +226,17 @@ namespace Fic.XTB.PowerBiEmbedder
             var powerBiReportId = tbReportId.Text;
             var reportUrl = tbPbiUrl.Text == "" ? "https://app.powerbi.com" : tbPbiUrl.Text;
 
-            var filter = "";
+            var filterString = "";
             if(cbxPbiFilter.Checked) {
                 var pbiTableName = tbPbiTable.Text;
                 var pbiColumnName = tbPbiColumn.Text;
                 var cdsFieldName = ((AttributeProxy)cmbEntityField.SelectedItem).LogicalName;
-                filter = $"<PowerBIFilter>{{\"Filter\": \"[{{\\\"$schema\\\":\\\"basic\\\",\\\"target\\\":{{\\\"table\\\":\\\"{pbiTableName}\\\",\\\"column\\\":\\\"{pbiColumnName}\\\"}},\\\"operator\\\":\\\"In\\\",\\\"values\\\":[$a],\\\"filterType\\\":1}}]\", \"Alias\": {{\"$a\": \"{cdsFieldName}\"}}}}</PowerBIFilter>";
-            }
+
+                var filter = new PbiFilter(pbiTableName, pbiColumnName, cdsFieldName);
+                filterString = $"<PowerBIFilter>{filter.ToJsonString()}</PowerBIFilter>";
+            };
+
+            //filter = $"<PowerBIFilter>{{\"Filter\": \"[{{\\\"$schema\\\":\\\"basic\\\",\\\"target\\\":{{\\\"table\\\":\\\"{pbiTableName}\\\",\\\"column\\\":\\\"{pbiColumnName}\\\"}},\\\"operator\\\":\\\"In\\\",\\\"values\\\":[$a],\\\"filterType\\\":1}}]\", \"Alias\": {{\"$a\": \"{cdsFieldName}\"}}}}</PowerBIFilter>";
 
             var rowspan = tbRowspan.Text != "" ? tbRowspan.Text : "1";
 
@@ -255,7 +259,7 @@ namespace Fic.XTB.PowerBiEmbedder
                                         $"<PowerBIGroupId>{powerBiGroupId}</PowerBIGroupId>" +
                                         $"<PowerBIReportId>{powerBiReportId}</PowerBIReportId>" +
                                         $"<TileUrl>{reportUrl}/reportEmbed?reportId={powerBiReportId}</TileUrl>" +
-                                        $"{filter}"+
+                                        $"{filterString}"+
                                     "</parameters>" +
                                 "</control>" +
                             "</cell>" +
@@ -435,11 +439,33 @@ namespace Fic.XTB.PowerBiEmbedder
                 tbReportId.Text = powerBiControl.Parameters.PowerBIReportId.ToUpper();
                 tbPbiUrl.Text = powerBiControl.Parameters.TileUrl.Split(new []{ "/reportEmbed" },StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
                 cbxPbiFilter.Checked = powerBiControl.Parameters.PowerBIFilter != null;
+
+                if(powerBiControl.Parameters.PowerBIFilter != null) {
+                    var filter = new PbiFilter(powerBiControl.Parameters.PowerBIFilter);
+
+                    tbPbiTable.Text = filter.Filter.Target.Table;
+                    tbPbiColumn.Text = filter.Filter.Target.Column;
+
+                    foreach (AttributeProxy ap in cmbEntityField.Items){
+                        if(ap.LogicalName != filter.Alias.A) continue;
+                        cmbEntityField.SelectedItem = ap;
+                        break;
+                    }
+                } else {
+                    tbPbiTable.Text = "";
+                    tbPbiColumn.Text = "";
+                    cmbEntityField.SelectedIndex = -1;
+
+                }
             } else {
                 tbGrpId.Text = "00000000-0000-0000-0000-000000000000";
                 tbReportId.Text = "00000000-0000-0000-0000-000000000000";
                 tbPbiUrl.Text = "https://app.powerbi.com";
                 cbxPbiFilter.Checked = false;
+
+                tbPbiTable.Text = "";
+                tbPbiColumn.Text = "";
+                cmbEntityField.SelectedIndex = -1;
             }
         }
 
