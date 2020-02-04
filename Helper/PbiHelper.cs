@@ -30,9 +30,11 @@ namespace Fic.XTB.PowerBiEmbedder.Helper
         {
             var groups = new List<PbiGroup>();
 
-            dynamic response = _client.GetAsync("https://api.powerbi.com/v1.0/myorg/groups").GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            var response = _client.GetAsync("https://api.powerbi.com/v1.0/myorg/groups").GetAwaiter().GetResult();
+            if(!response.IsSuccessStatusCode) { throw new Exception($"Fetching groups from Power BI resulted as {response.ReasonPhrase}");}
 
-            var pbiGroupsResponse = (PbiGroupsResponse)JsonConvert.DeserializeObject<PbiGroupsResponse>(response);
+            var jsonResponse =  response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            var pbiGroupsResponse = JsonConvert.DeserializeObject<PbiGroupsResponse>(jsonResponse);
 
             groups.Add(new PbiGroup
             {
@@ -54,22 +56,25 @@ namespace Fic.XTB.PowerBiEmbedder.Helper
             return groups.Where(g=>g.Reports.Count > 0).ToList();
         }
 
-        public List<PbiReport> GetReportsFromMyWorkspace()
-        {
-            dynamic response = _client.GetAsync("https://api.powerbi.com/v1.0/myorg/reports").GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
+        public List<PbiReport> GetReportsFromMyWorkspace() {
+            var response = _client.GetAsync("https://api.powerbi.com/v1.0/myorg/reports").GetAwaiter().GetResult();
+            if (!response.IsSuccessStatusCode) { throw new Exception($"Fetching my reports from 'My Workspace' resulted as {response.ReasonPhrase}"); }
 
-            var pbiGroupsResponse = (PbiReportsResponse)JsonConvert.DeserializeObject<PbiReportsResponse>(response);
+            var jsonResponse = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+            var pbiGroupsResponse = JsonConvert.DeserializeObject<PbiReportsResponse>(jsonResponse);
 
             return pbiGroupsResponse.Reports;
         }
 
-        public List<PbiReport> Getreports(string groupId)
-        {
-            dynamic response = _client.GetAsync($"https://api.powerbi.com/v1.0/myorg/groups/{groupId}/reports").GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
+        public List<PbiReport> Getreports(string groupId) {
+            var response = _client.GetAsync($"https://api.powerbi.com/v1.0/myorg/groups/{groupId}/reports").GetAwaiter().GetResult();
+            if (!response.IsSuccessStatusCode) { throw new Exception($"Fetching reports from group resulted as {response.ReasonPhrase}"); }
 
-            if (response == "") { return null; }
+            var jsonResponse = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            if (jsonResponse == "") { return null; }
 
-            var reports = (PbiReportsResponse)JsonConvert.DeserializeObject<PbiReportsResponse>(response);
+            var reports = JsonConvert.DeserializeObject<PbiReportsResponse>(jsonResponse);
 
             return reports.Reports.OrderBy(r => r.Name).ToList();
         }
