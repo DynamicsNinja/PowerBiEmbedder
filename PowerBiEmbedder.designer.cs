@@ -34,6 +34,7 @@
             this.btnClose = new System.Windows.Forms.ToolStripButton();
             this.tssSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnPublish = new System.Windows.Forms.ToolStripButton();
+            this.btnConnect = new System.Windows.Forms.ToolStripButton();
             this.tsSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.lblPbiSettings = new System.Windows.Forms.ToolStripLabel();
             this.cmbPbiSettings = new System.Windows.Forms.ToolStripComboBox();
@@ -49,6 +50,12 @@
             this.cmbEntity = new System.Windows.Forms.ComboBox();
             this.lblEntity = new System.Windows.Forms.Label();
             this.gbPowerBiConfig = new System.Windows.Forms.GroupBox();
+            this.cbReport = new System.Windows.Forms.ComboBox();
+            this.cbGroup = new System.Windows.Forms.ComboBox();
+            this.pMethod = new System.Windows.Forms.Panel();
+            this.rbManual = new System.Windows.Forms.RadioButton();
+            this.rbApi = new System.Windows.Forms.RadioButton();
+            this.lbl = new System.Windows.Forms.Label();
             this.tbPbiUrl = new System.Windows.Forms.TextBox();
             this.lblPbiUrl = new System.Windows.Forms.Label();
             this.cbxPbiFilter = new System.Windows.Forms.CheckBox();
@@ -74,6 +81,7 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.gbTarget.SuspendLayout();
             this.gbPowerBiConfig.SuspendLayout();
+            this.pMethod.SuspendLayout();
             this.gbFormatting.SuspendLayout();
             this.gbPbiFilters.SuspendLayout();
             this.SuspendLayout();
@@ -85,6 +93,7 @@
             this.btnClose,
             this.tssSeparator1,
             this.btnPublish,
+            this.btnConnect,
             this.tsSeparator1,
             this.lblPbiSettings,
             this.cmbPbiSettings});
@@ -118,6 +127,16 @@
             this.btnPublish.Size = new System.Drawing.Size(133, 28);
             this.btnPublish.Text = "Publish Report";
             this.btnPublish.Click += new System.EventHandler(this.btnPublish_Click);
+            // 
+            // btnConnect
+            // 
+            this.btnConnect.Enabled = false;
+            this.btnConnect.Image = ((System.Drawing.Image)(resources.GetObject("btnConnect.Image")));
+            this.btnConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnConnect.Name = "btnConnect";
+            this.btnConnect.Size = new System.Drawing.Size(134, 28);
+            this.btnConnect.Text = "Connect to PBI";
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // tsSeparator1
             // 
@@ -162,14 +181,15 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 34);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(962, 485);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // gbTarget
             // 
-            this.gbTarget.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.gbTarget.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbTarget.Controls.Add(this.cmbSection);
             this.gbTarget.Controls.Add(this.lblSection);
@@ -182,7 +202,7 @@
             this.gbTarget.Enabled = false;
             this.gbTarget.Location = new System.Drawing.Point(3, 3);
             this.gbTarget.Name = "gbTarget";
-            this.gbTarget.Size = new System.Drawing.Size(475, 232);
+            this.gbTarget.Size = new System.Drawing.Size(475, 285);
             this.gbTarget.TabIndex = 24;
             this.gbTarget.TabStop = false;
             this.gbTarget.Text = "Target";
@@ -277,8 +297,13 @@
             // 
             // gbPowerBiConfig
             // 
-            this.gbPowerBiConfig.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.gbPowerBiConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbPowerBiConfig.Controls.Add(this.cbReport);
+            this.gbPowerBiConfig.Controls.Add(this.cbGroup);
+            this.gbPowerBiConfig.Controls.Add(this.pMethod);
+            this.gbPowerBiConfig.Controls.Add(this.lbl);
             this.gbPowerBiConfig.Controls.Add(this.tbPbiUrl);
             this.gbPowerBiConfig.Controls.Add(this.lblPbiUrl);
             this.gbPowerBiConfig.Controls.Add(this.cbxPbiFilter);
@@ -290,16 +315,86 @@
             this.gbPowerBiConfig.Enabled = false;
             this.gbPowerBiConfig.Location = new System.Drawing.Point(484, 3);
             this.gbPowerBiConfig.Name = "gbPowerBiConfig";
-            this.gbPowerBiConfig.Size = new System.Drawing.Size(475, 232);
+            this.gbPowerBiConfig.Size = new System.Drawing.Size(475, 285);
             this.gbPowerBiConfig.TabIndex = 25;
             this.gbPowerBiConfig.TabStop = false;
             this.gbPowerBiConfig.Text = "Power BI Config";
+            // 
+            // cbReport
+            // 
+            this.cbReport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbReport.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbReport.FormattingEnabled = true;
+            this.cbReport.Location = new System.Drawing.Point(92, 133);
+            this.cbReport.Name = "cbReport";
+            this.cbReport.Size = new System.Drawing.Size(342, 24);
+            this.cbReport.TabIndex = 28;
+            this.cbReport.Visible = false;
+            this.cbReport.SelectedIndexChanged += new System.EventHandler(this.cbReport_SelectedIndexChanged);
+            this.cbReport.Validating += new System.ComponentModel.CancelEventHandler(this.cbReport_Validating);
+            // 
+            // cbGroup
+            // 
+            this.cbGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbGroup.FormattingEnabled = true;
+            this.cbGroup.Location = new System.Drawing.Point(92, 82);
+            this.cbGroup.Name = "cbGroup";
+            this.cbGroup.Size = new System.Drawing.Size(342, 24);
+            this.cbGroup.TabIndex = 14;
+            this.cbGroup.Visible = false;
+            this.cbGroup.SelectedIndexChanged += new System.EventHandler(this.cbGroup_SelectedIndexChanged);
+            this.cbGroup.Validating += new System.ComponentModel.CancelEventHandler(this.cbGroup_Validating);
+            // 
+            // pMethod
+            // 
+            this.pMethod.Controls.Add(this.rbManual);
+            this.pMethod.Controls.Add(this.rbApi);
+            this.pMethod.Location = new System.Drawing.Point(92, 21);
+            this.pMethod.Name = "pMethod";
+            this.pMethod.Size = new System.Drawing.Size(342, 40);
+            this.pMethod.TabIndex = 27;
+            // 
+            // rbManual
+            // 
+            this.rbManual.AutoSize = true;
+            this.rbManual.Checked = true;
+            this.rbManual.Location = new System.Drawing.Point(3, 11);
+            this.rbManual.Name = "rbManual";
+            this.rbManual.Size = new System.Drawing.Size(75, 21);
+            this.rbManual.TabIndex = 26;
+            this.rbManual.TabStop = true;
+            this.rbManual.Text = "Manual";
+            this.rbManual.UseVisualStyleBackColor = true;
+            this.rbManual.CheckedChanged += new System.EventHandler(this.method_CheckedChanged);
+            // 
+            // rbApi
+            // 
+            this.rbApi.AutoSize = true;
+            this.rbApi.Enabled = false;
+            this.rbApi.Location = new System.Drawing.Point(84, 11);
+            this.rbApi.Name = "rbApi";
+            this.rbApi.Size = new System.Drawing.Size(109, 21);
+            this.rbApi.TabIndex = 25;
+            this.rbApi.Text = "Power BI API";
+            this.rbApi.UseVisualStyleBackColor = true;
+            // 
+            // lbl
+            // 
+            this.lbl.AutoSize = true;
+            this.lbl.Location = new System.Drawing.Point(6, 34);
+            this.lbl.Name = "lbl";
+            this.lbl.Size = new System.Drawing.Size(55, 17);
+            this.lbl.TabIndex = 24;
+            this.lbl.Text = "Method";
             // 
             // tbPbiUrl
             // 
             this.tbPbiUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbPbiUrl.Location = new System.Drawing.Point(92, 133);
+            this.tbPbiUrl.Location = new System.Drawing.Point(92, 184);
             this.tbPbiUrl.Name = "tbPbiUrl";
             this.tbPbiUrl.Size = new System.Drawing.Size(342, 22);
             this.tbPbiUrl.TabIndex = 23;
@@ -307,7 +402,7 @@
             // lblPbiUrl
             // 
             this.lblPbiUrl.AutoSize = true;
-            this.lblPbiUrl.Location = new System.Drawing.Point(6, 136);
+            this.lblPbiUrl.Location = new System.Drawing.Point(6, 187);
             this.lblPbiUrl.Name = "lblPbiUrl";
             this.lblPbiUrl.Size = new System.Drawing.Size(36, 17);
             this.lblPbiUrl.TabIndex = 22;
@@ -316,7 +411,7 @@
             // cbxPbiFilter
             // 
             this.cbxPbiFilter.AutoSize = true;
-            this.cbxPbiFilter.Location = new System.Drawing.Point(92, 184);
+            this.cbxPbiFilter.Location = new System.Drawing.Point(92, 235);
             this.cbxPbiFilter.Name = "cbxPbiFilter";
             this.cbxPbiFilter.Size = new System.Drawing.Size(18, 17);
             this.cbxPbiFilter.TabIndex = 21;
@@ -326,7 +421,7 @@
             // lblPbiFilter
             // 
             this.lblPbiFilter.AutoSize = true;
-            this.lblPbiFilter.Location = new System.Drawing.Point(6, 184);
+            this.lblPbiFilter.Location = new System.Drawing.Point(6, 235);
             this.lblPbiFilter.Name = "lblPbiFilter";
             this.lblPbiFilter.Size = new System.Drawing.Size(39, 17);
             this.lblPbiFilter.TabIndex = 21;
@@ -336,7 +431,7 @@
             // 
             this.tbGrpId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbGrpId.Location = new System.Drawing.Point(92, 31);
+            this.tbGrpId.Location = new System.Drawing.Point(92, 82);
             this.tbGrpId.Name = "tbGrpId";
             this.tbGrpId.Size = new System.Drawing.Size(342, 22);
             this.tbGrpId.TabIndex = 16;
@@ -346,7 +441,7 @@
             // 
             this.tbReportId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbReportId.Location = new System.Drawing.Point(92, 82);
+            this.tbReportId.Location = new System.Drawing.Point(92, 133);
             this.tbReportId.Name = "tbReportId";
             this.tbReportId.Size = new System.Drawing.Size(342, 22);
             this.tbReportId.TabIndex = 15;
@@ -355,7 +450,7 @@
             // lblReportId
             // 
             this.lblReportId.AutoSize = true;
-            this.lblReportId.Location = new System.Drawing.Point(6, 85);
+            this.lblReportId.Location = new System.Drawing.Point(6, 136);
             this.lblReportId.Name = "lblReportId";
             this.lblReportId.Size = new System.Drawing.Size(68, 17);
             this.lblReportId.TabIndex = 8;
@@ -364,7 +459,7 @@
             // lblGrpId
             // 
             this.lblGrpId.AutoSize = true;
-            this.lblGrpId.Location = new System.Drawing.Point(6, 34);
+            this.lblGrpId.Location = new System.Drawing.Point(6, 85);
             this.lblGrpId.Name = "lblGrpId";
             this.lblGrpId.Size = new System.Drawing.Size(65, 17);
             this.lblGrpId.TabIndex = 6;
@@ -372,16 +467,17 @@
             // 
             // gbFormatting
             // 
-            this.gbFormatting.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.gbFormatting.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbFormatting.Controls.Add(this.lblRowspan);
             this.gbFormatting.Controls.Add(this.lblSectionName);
             this.gbFormatting.Controls.Add(this.tbSectionName);
             this.gbFormatting.Controls.Add(this.tbRowspan);
             this.gbFormatting.Enabled = false;
-            this.gbFormatting.Location = new System.Drawing.Point(3, 241);
+            this.gbFormatting.Location = new System.Drawing.Point(3, 294);
             this.gbFormatting.Name = "gbFormatting";
-            this.gbFormatting.Size = new System.Drawing.Size(475, 241);
+            this.gbFormatting.Size = new System.Drawing.Size(475, 188);
             this.gbFormatting.TabIndex = 27;
             this.gbFormatting.TabStop = false;
             this.gbFormatting.Text = "Formatting";
@@ -427,7 +523,8 @@
             // 
             // gbPbiFilters
             // 
-            this.gbPbiFilters.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.gbPbiFilters.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbPbiFilters.Controls.Add(this.cmbEntityField);
             this.gbPbiFilters.Controls.Add(this.lblCdsField);
@@ -436,9 +533,9 @@
             this.gbPbiFilters.Controls.Add(this.tbPbiTable);
             this.gbPbiFilters.Controls.Add(this.tbPbiColumn);
             this.gbPbiFilters.Enabled = false;
-            this.gbPbiFilters.Location = new System.Drawing.Point(484, 241);
+            this.gbPbiFilters.Location = new System.Drawing.Point(484, 294);
             this.gbPbiFilters.Name = "gbPbiFilters";
-            this.gbPbiFilters.Size = new System.Drawing.Size(475, 241);
+            this.gbPbiFilters.Size = new System.Drawing.Size(475, 188);
             this.gbPbiFilters.TabIndex = 26;
             this.gbPbiFilters.TabStop = false;
             this.gbPbiFilters.Text = "FIlter";
@@ -523,6 +620,8 @@
             this.gbTarget.PerformLayout();
             this.gbPowerBiConfig.ResumeLayout(false);
             this.gbPowerBiConfig.PerformLayout();
+            this.pMethod.ResumeLayout(false);
+            this.pMethod.PerformLayout();
             this.gbFormatting.ResumeLayout(false);
             this.gbFormatting.PerformLayout();
             this.gbPbiFilters.ResumeLayout(false);
@@ -572,5 +671,12 @@
         private System.Windows.Forms.Label lblPbiTable;
         private System.Windows.Forms.TextBox tbPbiTable;
         private System.Windows.Forms.TextBox tbPbiColumn;
+        private System.Windows.Forms.ToolStripButton btnConnect;
+        private System.Windows.Forms.Panel pMethod;
+        private System.Windows.Forms.RadioButton rbManual;
+        private System.Windows.Forms.RadioButton rbApi;
+        private System.Windows.Forms.Label lbl;
+        private System.Windows.Forms.ComboBox cbReport;
+        private System.Windows.Forms.ComboBox cbGroup;
     }
 }

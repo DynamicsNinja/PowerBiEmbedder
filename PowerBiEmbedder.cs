@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using Fic.XTB.PowerBiEmbedder.Helper;
@@ -16,12 +17,17 @@ using Microsoft.Xrm.Sdk.Metadata;
 using Microsoft.Xrm.Sdk.Query;
 using XrmToolBox.Extensibility;
 using XrmToolBox.Extensibility.Interfaces;
+using CheckBox = System.Windows.Forms.CheckBox;
+using ComboBox = System.Windows.Forms.ComboBox;
 using Control = Fic.XTB.PowerBiEmbedder.Model.Control;
+using RadioButton = System.Windows.Forms.RadioButton;
+using TextBox = System.Windows.Forms.TextBox;
 
 namespace Fic.XTB.PowerBiEmbedder
 {
     public partial class PowerBiEmbedder : PluginControlBase, IGitHubPlugin {
-        private Settings mySettings;
+        public Settings Settings;
+        public string CurrentOrg;
         public string RepositoryName => "PowerBiEmbedder";
         public string UserName => "DynamicsNinja";
 
@@ -31,15 +37,27 @@ namespace Fic.XTB.PowerBiEmbedder
         private bool _pbiEnabled;
         private Entity _systemSettings;
 
+        public List<PbiGroup> PbiGroups;
+        public RadioButton RbApiButton;
+        public ComboBox CmbGroups;
+        public ComboBox CmbReports;
+
+        public TextBox TbGroup;
+        public TextBox TbReport;
+
+        private readonly AzureLoginDialog azureLogin;
+
         public PowerBiEmbedder() {
             InitializeComponent();
+
+            azureLogin = new AzureLoginDialog(this);
         }
 
         private void MyPluginControl_Load(object sender, EventArgs e) {
             // Loads or creates the settings for the plugin
-            if(!SettingsManager.Instance.TryLoad(GetType(), out mySettings)) {
-                mySettings = new Settings();
-
+            if(!SettingsManager.Instance.TryLoad(GetType(), out Settings)) {
+                Settings = new Settings();
+                Settings.CurrentOrg = CurrentOrg;
                 LogWarning("Settings not found => a new settings file has been created!");
             } else {
                 LogInfo("Settings found and loaded");
@@ -55,7 +73,7 @@ namespace Fic.XTB.PowerBiEmbedder
         /// <param name="e"></param>
         private void MyPluginControl_OnCloseTool(object sender, EventArgs e) {
             // Before leaving, save the settings
-            SettingsManager.Instance.Save(GetType(), mySettings);
+            SettingsManager.Instance.Save(GetType(), Settings);
         }
 
         /// <summary>
@@ -64,8 +82,9 @@ namespace Fic.XTB.PowerBiEmbedder
         public override void UpdateConnection(IOrganizationService newService, ConnectionDetail detail, string actionName, object parameter) {
             base.UpdateConnection(newService, detail, actionName, parameter);
 
-            if(mySettings != null && detail != null) {
-                mySettings.LastUsedOrganizationWebappUrl = detail.WebApplicationUrl;
+            CurrentOrg = detail?.Organization;
+            if(Settings != null && detail != null) {
+                Settings.LastUsedOrganizationWebappUrl = detail.WebApplicationUrl;
                 LogInfo("Connection has changed to: {0}", detail.WebApplicationUrl);
             }
         }
@@ -74,6 +93,13 @@ namespace Fic.XTB.PowerBiEmbedder
             LogInfo("Connection has changed to: {0}", e.ConnectionDetail.WebApplicationUrl);
 
             UnlockControls();
+
+            RbApiButton = rbApi;
+            CmbGroups = cbGroup;
+            CmbReports = cbReport;
+
+            TbReport = tbReportId;
+            TbGroup = tbGrpId;
 
             tbGrpId.Text = "00000000-0000-0000-0000-000000000000";
             tbReportId.Text = "00000000-0000-0000-0000-000000000000";
@@ -437,6 +463,9 @@ namespace Fic.XTB.PowerBiEmbedder
             if(powerBiControl != null) {
                 tbGrpId.Text = powerBiControl.Parameters.PowerBIGroupId.ToUpper();
                 tbReportId.Text = powerBiControl.Parameters.PowerBIReportId.ToUpper();
+
+                InitializeDropdowns(tbGrpId.Text, tbReportId.Text);
+
                 tbPbiUrl.Text = powerBiControl.Parameters.TileUrl.Split(new []{ "/reportEmbed" },StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
                 cbxPbiFilter.Checked = powerBiControl.Parameters.PowerBIFilter != null;
 
@@ -459,7 +488,11 @@ namespace Fic.XTB.PowerBiEmbedder
                 }
             } else {
                 tbGrpId.Text = "00000000-0000-0000-0000-000000000000";
+                cbGroup.SelectedItem = null;
+
                 tbReportId.Text = "00000000-0000-0000-0000-000000000000";
+                cbReport.SelectedItem = null;
+
                 tbPbiUrl.Text = "https://app.powerbi.com";
                 cbxPbiFilter.Checked = false;
 
@@ -467,12 +500,16 @@ namespace Fic.XTB.PowerBiEmbedder
                 tbPbiColumn.Text = "";
                 cmbEntityField.SelectedIndex = -1;
             }
+
+            btnConnect.Enabled = true;
+            gbFormatting.Enabled = true;
+            gbPowerBiConfig.Enabled = true;
         }
 
         private void UnlockControls() {
             gbTarget.Enabled = true;
-            gbFormatting.Enabled = true;
-            gbPowerBiConfig.Enabled = true;
+            //gbFormatting.Enabled = true;
+            //gbPowerBiConfig.Enabled = true;
 
             cmbPbiSettings.Enabled = true;
 
@@ -548,6 +585,112 @@ namespace Fic.XTB.PowerBiEmbedder
                 e.Cancel = true;
             }else{
                 errorProvider.SetError(cmbEntityField, "");
+            }
+        }
+
+        private void btnConnect_Click(object sender, EventArgs e) {
+            azureLogin.ShowDialog();
+        }
+
+        private void method_CheckedChanged(object sender, EventArgs e)
+        {
+            if(rbApi.Checked) {
+                tbGrpId.Visible = false;
+                tbReportId.Visible = false;
+                tbPbiUrl.Enabled = false;
+
+                cbGroup.Visible = true;
+                cbReport.Visible = true;
+            }
+
+            if(rbManual.Checked) {
+                tbGrpId.Visible = true;
+                tbReportId.Visible = true;
+                tbPbiUrl.Enabled = true;
+
+                cbGroup.Visible = false;
+                cbReport.Visible = false;
+            }
+        }
+
+        private void cbGroup_SelectedIndexChanged(object sender, EventArgs e) {
+            if(cbGroup.SelectedItem == null) { return;}
+            var selectedGroup = ((GroupProxy)cbGroup.SelectedItem).Value;
+            tbGrpId.Text = selectedGroup.Id;
+            tbReportId.Text = "";
+
+            cbReport.Items.Clear();
+            foreach(var report in selectedGroup.Reports) {
+                var reportProxy = new ReportProxy
+                {
+                    Text = report.Name,
+                    Value = report
+                };
+                cbReport.Items.Add(reportProxy);
+            }
+
+        }
+
+        private void cbReport_SelectedIndexChanged(object sender, EventArgs e) {
+            if (cbReport.SelectedItem == null) { return; }
+            var selectedReport = ((ReportProxy)cbReport.SelectedItem).Value;
+
+            tbPbiUrl.Text = selectedReport.EmbedUrl.Split(new[] { "/reportEmbed" }, StringSplitOptions.None).FirstOrDefault();
+            tbReportId.Text = selectedReport.Id;
+        }
+
+        private void cbGroup_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (cbGroup.SelectedItem == null && rbApi.Checked)
+            {
+                errorProvider.SetError(cbGroup, "You must select group.");
+                e.Cancel = true;
+            }
+            else
+            {
+                errorProvider.SetError(cbGroup, "");
+            }
+        }
+
+        private void cbReport_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (cbReport.SelectedItem == null && cbGroup.SelectedItem != null && rbApi.Checked)
+            {
+                errorProvider.SetError(cbReport, "You must select group.");
+                e.Cancel = true;
+            }
+            else
+            {
+                errorProvider.SetError(cbReport, "");
+            }
+        }
+
+        public void InitializeDropdowns(string groupId, string reportId) {
+            if(cbGroup.Items.Count == 0) { return;}
+            foreach (GroupProxy group in cbGroup.Items)
+            {
+                if (group.Value.Id.ToUpper() as string != groupId.ToUpper()) continue;
+                cbGroup.SelectedItem = group;
+
+                cbReport.Items.Clear();
+                foreach (var report in group.Value.Reports)
+                {
+                    var reportProxy = new ReportProxy
+                    {
+                        Text = report.Name,
+                        Value = report
+                    };
+                    cbReport.Items.Add(reportProxy);
+                }
+                break;
+            }
+
+            foreach (ReportProxy report in cbReport.Items)
+            {
+                if (report.Value.Id.ToUpper() as string != reportId.ToUpper()) continue;
+                cbReport.SelectedItem = report;
+
+                break;
             }
         }
     }
