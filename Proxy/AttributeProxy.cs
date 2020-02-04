@@ -4,15 +4,15 @@ namespace Fic.XTB.PowerBiEmbedder.Proxy
 {
     public class AttributeProxy
     {
-        internal AttributeMetadata attributeMetadata;
+        internal AttributeMetadata AttributeMetadata;
 
         public AttributeProxy(AttributeMetadata metadata)
         {
-            attributeMetadata = metadata;
+            AttributeMetadata = metadata;
         }
 
-        public string DisplayName { get { return attributeMetadata.DisplayName?.UserLocalizedLabel?.Label; } }
-        public string LogicalName { get { return attributeMetadata.LogicalName; } }
+        public string DisplayName { get { return AttributeMetadata.DisplayName?.UserLocalizedLabel?.Label; } }
+        public string LogicalName { get { return AttributeMetadata.LogicalName; } }
 
         public override string ToString()
         {

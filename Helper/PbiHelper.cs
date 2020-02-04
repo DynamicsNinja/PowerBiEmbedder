@@ -12,10 +12,9 @@ namespace Fic.XTB.PowerBiEmbedder.Helper
 {
     public class PbiHelper
     {
-        private string _authority = "https://login.windows.net/common";
-        private string _returnUri = "https://TodoListClient";
-        private string _tenantID = "b0460523-b78c-4b4a-8a10-5928b799ad45";
-        private string _clientId = "38f751c1-74e7-4a44-8fb2-ab88e051066b";
+        private string _returnUri;
+        private string _tenantID;
+        private string _clientId;
 
         private HttpClient _client;
 
@@ -82,14 +81,12 @@ namespace Fic.XTB.PowerBiEmbedder.Helper
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             client.DefaultRequestHeaders.Add("accept", "application/json");
-            //client.DefaultRequestHeaders.Add("x-ms-tenant-id",tenantID);
             _client =  client;
         }
 
         private string GetInteractiveClientToken()
         {
             AuthenticationContext ac = new AuthenticationContext($"https://login.microsoftonline.com/{_tenantID}");
-            AuthenticationResult result = null;
             try
             {
                 return ac.AcquireTokenSilentAsync("https://analysis.windows.net/powerbi/api", _clientId).GetAwaiter().GetResult().AccessToken;

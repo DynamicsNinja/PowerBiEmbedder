@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using Fic.XTB.PowerBiEmbedder.Helper;
@@ -45,19 +44,18 @@ namespace Fic.XTB.PowerBiEmbedder
         public TextBox TbGroup;
         public TextBox TbReport;
 
-        private readonly AzureLoginDialog azureLogin;
+        private readonly AzureLoginDialog _azureLogin;
 
         public PowerBiEmbedder() {
             InitializeComponent();
 
-            azureLogin = new AzureLoginDialog(this);
+            _azureLogin = new AzureLoginDialog(this);
         }
 
         private void MyPluginControl_Load(object sender, EventArgs e) {
             // Loads or creates the settings for the plugin
             if(!SettingsManager.Instance.TryLoad(GetType(), out Settings)) {
-                Settings = new Settings();
-                Settings.CurrentOrg = CurrentOrg;
+                Settings = new Settings { CurrentOrg = CurrentOrg };
                 LogWarning("Settings not found => a new settings file has been created!");
             } else {
                 LogInfo("Settings found and loaded");
@@ -262,8 +260,6 @@ namespace Fic.XTB.PowerBiEmbedder
                 filterString = $"<PowerBIFilter>{filter.ToJsonString()}</PowerBIFilter>";
             };
 
-            //filter = $"<PowerBIFilter>{{\"Filter\": \"[{{\\\"$schema\\\":\\\"basic\\\",\\\"target\\\":{{\\\"table\\\":\\\"{pbiTableName}\\\",\\\"column\\\":\\\"{pbiColumnName}\\\"}},\\\"operator\\\":\\\"In\\\",\\\"values\\\":[$a],\\\"filterType\\\":1}}]\", \"Alias\": {{\"$a\": \"{cdsFieldName}\"}}}}</PowerBIFilter>";
-
             var rowspan = tbRowspan.Text != "" ? tbRowspan.Text : "1";
 
             var sectionLabel = tbSectionName.Text;
@@ -410,7 +406,7 @@ namespace Fic.XTB.PowerBiEmbedder
             var qe = new QueryExpression("organization");
             qe.ColumnSet = new ColumnSet("powerbifeatureenabled");
             _systemSettings = Service.RetrieveMultiple(qe).Entities.FirstOrDefault();
-            _pbiEnabled = (bool)_systemSettings["powerbifeatureenabled"];
+            _pbiEnabled = (bool)_systemSettings?["powerbifeatureenabled"];
 
             if(_pbiEnabled) {
                 cmbPbiSettings.SelectedItem = "On";
@@ -589,7 +585,7 @@ namespace Fic.XTB.PowerBiEmbedder
         }
 
         private void btnConnect_Click(object sender, EventArgs e) {
-            azureLogin.ShowDialog();
+            _azureLogin.ShowDialog();
         }
 
         private void method_CheckedChanged(object sender, EventArgs e)
@@ -669,7 +665,7 @@ namespace Fic.XTB.PowerBiEmbedder
             if(cbGroup.Items.Count == 0) { return;}
             foreach (GroupProxy group in cbGroup.Items)
             {
-                if (group.Value.Id.ToUpper() as string != groupId.ToUpper()) continue;
+                if (@group.Value.Id.ToUpper() != groupId.ToUpper()) continue;
                 cbGroup.SelectedItem = group;
 
                 cbReport.Items.Clear();
@@ -687,7 +683,7 @@ namespace Fic.XTB.PowerBiEmbedder
 
             foreach (ReportProxy report in cbReport.Items)
             {
-                if (report.Value.Id.ToUpper() as string != reportId.ToUpper()) continue;
+                if (report.Value.Id.ToUpper() != reportId.ToUpper()) continue;
                 cbReport.SelectedItem = report;
 
                 break;
