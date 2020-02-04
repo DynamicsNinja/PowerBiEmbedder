@@ -64,7 +64,8 @@ namespace Fic.XTB.PowerBiEmbedder
                     {
                         if (completedargs.Error != null)
                         {
-                            MessageBox.Show(completedargs.Error.Message);
+                            MessageBox.Show(completedargs.Error.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                            EnableButtons();
                         }
                         else
                         {
