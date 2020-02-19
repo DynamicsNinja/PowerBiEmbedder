@@ -11,6 +11,8 @@
         <description>XrmToolBox plugin that allows you to embed the Power BI report into the CDS form.</description>
         <summary>XrmToolBox plugin that allows you to embed the Power BI report into the CDS form.</summary>
         <releaseNotes>
+1.2020.2.7
+- Added link toggle between section and Power BI configuration
 1.2020.2.1
 - Added support for fetching report data via Power BI API
 1.2019.12.7

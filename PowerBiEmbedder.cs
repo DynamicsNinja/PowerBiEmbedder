@@ -103,7 +103,8 @@ namespace Fic.XTB.PowerBiEmbedder
             tbReportId.Text = "00000000-0000-0000-0000-000000000000";
             tbPbiUrl.Text = "https://app.powerbi.com";
             tbRowspan.Text = "20";
-            cmbEntity.Text = "Select an entity";      
+            cmbEntity.Text = "Select an entity";
+            lblSection.Text = "Section 🔗";
 
             cmbEntityField.Enabled = false;
 
@@ -436,14 +437,16 @@ namespace Fic.XTB.PowerBiEmbedder
         }
 
         private void cmbSection_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {         
             var selectedSectionProxy = (SectionProxy)cmbSection.SelectedItem;
             var selectedSection = selectedSectionProxy.Section;
 
             var sectionName = selectedSection.Labels.FirstOrDefault()?.Description;
-            var rowSpan = selectedSection.Rows.FirstOrDefault()?.Cells.FirstOrDefault()?.RowSpan ?? "1";
-
             tbSectionName.Text = sectionName;
+
+            if (!cbxLinkValues.Checked) { return; }
+
+            var rowSpan = selectedSection.Rows.FirstOrDefault()?.Cells.FirstOrDefault()?.RowSpan ?? "1";
             tbRowspan.Text = rowSpan;
 
             Control powerBiControl = null;
@@ -500,6 +503,7 @@ namespace Fic.XTB.PowerBiEmbedder
             btnConnect.Enabled = true;
             gbFormatting.Enabled = true;
             gbPowerBiConfig.Enabled = true;
+            cbxLinkValues.Enabled = true;
         }
 
         private void UnlockControls() {
@@ -687,6 +691,19 @@ namespace Fic.XTB.PowerBiEmbedder
                 cbReport.SelectedItem = report;
 
                 break;
+            }
+        }
+
+        private void cbxLockConfig_CheckedChanged(object sender, EventArgs e)
+        {
+            if(cbxLinkValues.Checked) {
+                gbPbiFilters.Text = @"Filter 🔗";
+                gbPowerBiConfig.Text = @"Power BI Config 🔗";
+                lblSection.Text = @"Section 🔗";
+            } else {
+                gbPbiFilters.Text = @"Filter";
+                gbPowerBiConfig.Text = @"Power BI Config";
+                lblSection.Text = @"Section";
             }
         }
     }

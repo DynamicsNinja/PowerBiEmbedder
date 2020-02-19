@@ -41,6 +41,8 @@
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.gbTarget = new System.Windows.Forms.GroupBox();
+            this.cbxLinkValues = new System.Windows.Forms.CheckBox();
+            this.lblLinkValues = new System.Windows.Forms.Label();
             this.cmbSection = new System.Windows.Forms.ComboBox();
             this.lblSection = new System.Windows.Forms.Label();
             this.cmbTab = new System.Windows.Forms.ComboBox();
@@ -55,7 +57,7 @@
             this.pMethod = new System.Windows.Forms.Panel();
             this.rbManual = new System.Windows.Forms.RadioButton();
             this.rbApi = new System.Windows.Forms.RadioButton();
-            this.lbl = new System.Windows.Forms.Label();
+            this.lblMethod = new System.Windows.Forms.Label();
             this.tbPbiUrl = new System.Windows.Forms.TextBox();
             this.lblPbiUrl = new System.Windows.Forms.Label();
             this.cbxPbiFilter = new System.Windows.Forms.CheckBox();
@@ -76,6 +78,7 @@
             this.lblPbiTable = new System.Windows.Forms.Label();
             this.tbPbiTable = new System.Windows.Forms.TextBox();
             this.tbPbiColumn = new System.Windows.Forms.TextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolStripMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -191,6 +194,8 @@
             this.gbTarget.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbTarget.Controls.Add(this.cbxLinkValues);
+            this.gbTarget.Controls.Add(this.lblLinkValues);
             this.gbTarget.Controls.Add(this.cmbSection);
             this.gbTarget.Controls.Add(this.lblSection);
             this.gbTarget.Controls.Add(this.cmbTab);
@@ -206,6 +211,29 @@
             this.gbTarget.TabIndex = 24;
             this.gbTarget.TabStop = false;
             this.gbTarget.Text = "Target";
+            // 
+            // cbxLinkValues
+            // 
+            this.cbxLinkValues.AutoSize = true;
+            this.cbxLinkValues.Checked = true;
+            this.cbxLinkValues.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbxLinkValues.Enabled = false;
+            this.cbxLinkValues.Location = new System.Drawing.Point(111, 236);
+            this.cbxLinkValues.Name = "cbxLinkValues";
+            this.cbxLinkValues.Size = new System.Drawing.Size(18, 17);
+            this.cbxLinkValues.TabIndex = 29;
+            this.cbxLinkValues.UseVisualStyleBackColor = true;
+            this.cbxLinkValues.CheckedChanged += new System.EventHandler(this.cbxLockConfig_CheckedChanged);
+            // 
+            // lblLinkValues
+            // 
+            this.lblLinkValues.AutoSize = true;
+            this.lblLinkValues.Location = new System.Drawing.Point(6, 234);
+            this.lblLinkValues.Name = "lblLinkValues";
+            this.lblLinkValues.Size = new System.Drawing.Size(34, 17);
+            this.lblLinkValues.TabIndex = 14;
+            this.lblLinkValues.Text = "Link";
+            this.toolTip1.SetToolTip(this.lblLinkValues, "optrbv rtv rtvetrvbwtvb tbvrgwe vtwrbev rwebv rvteqbvrw ebvw");
             // 
             // cmbSection
             // 
@@ -303,7 +331,7 @@
             this.gbPowerBiConfig.Controls.Add(this.cbReport);
             this.gbPowerBiConfig.Controls.Add(this.cbGroup);
             this.gbPowerBiConfig.Controls.Add(this.pMethod);
-            this.gbPowerBiConfig.Controls.Add(this.lbl);
+            this.gbPowerBiConfig.Controls.Add(this.lblMethod);
             this.gbPowerBiConfig.Controls.Add(this.tbPbiUrl);
             this.gbPowerBiConfig.Controls.Add(this.lblPbiUrl);
             this.gbPowerBiConfig.Controls.Add(this.cbxPbiFilter);
@@ -318,7 +346,7 @@
             this.gbPowerBiConfig.Size = new System.Drawing.Size(475, 285);
             this.gbPowerBiConfig.TabIndex = 25;
             this.gbPowerBiConfig.TabStop = false;
-            this.gbPowerBiConfig.Text = "Power BI Config";
+            this.gbPowerBiConfig.Text = "Power BI Config 🔗";
             // 
             // cbReport
             // 
@@ -381,14 +409,14 @@
             this.rbApi.Text = "Power BI API";
             this.rbApi.UseVisualStyleBackColor = true;
             // 
-            // lbl
+            // lblMethod
             // 
-            this.lbl.AutoSize = true;
-            this.lbl.Location = new System.Drawing.Point(6, 34);
-            this.lbl.Name = "lbl";
-            this.lbl.Size = new System.Drawing.Size(55, 17);
-            this.lbl.TabIndex = 24;
-            this.lbl.Text = "Method";
+            this.lblMethod.AutoSize = true;
+            this.lblMethod.Location = new System.Drawing.Point(6, 34);
+            this.lblMethod.Name = "lblMethod";
+            this.lblMethod.Size = new System.Drawing.Size(55, 17);
+            this.lblMethod.TabIndex = 24;
+            this.lblMethod.Text = "Method";
             // 
             // tbPbiUrl
             // 
@@ -411,7 +439,7 @@
             // cbxPbiFilter
             // 
             this.cbxPbiFilter.AutoSize = true;
-            this.cbxPbiFilter.Location = new System.Drawing.Point(92, 235);
+            this.cbxPbiFilter.Location = new System.Drawing.Point(92, 236);
             this.cbxPbiFilter.Name = "cbxPbiFilter";
             this.cbxPbiFilter.Size = new System.Drawing.Size(18, 17);
             this.cbxPbiFilter.TabIndex = 21;
@@ -538,7 +566,7 @@
             this.gbPbiFilters.Size = new System.Drawing.Size(475, 188);
             this.gbPbiFilters.TabIndex = 26;
             this.gbPbiFilters.TabStop = false;
-            this.gbPbiFilters.Text = "FIlter";
+            this.gbPbiFilters.Text = "FIlter 🔗";
             // 
             // cmbEntityField
             // 
@@ -675,8 +703,11 @@
         private System.Windows.Forms.Panel pMethod;
         private System.Windows.Forms.RadioButton rbManual;
         private System.Windows.Forms.RadioButton rbApi;
-        private System.Windows.Forms.Label lbl;
+        private System.Windows.Forms.Label lblMethod;
         private System.Windows.Forms.ComboBox cbReport;
         private System.Windows.Forms.ComboBox cbGroup;
+        private System.Windows.Forms.CheckBox cbxLinkValues;
+        private System.Windows.Forms.Label lblLinkValues;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
