@@ -40,9 +40,11 @@ namespace Fic.XTB.PowerBiEmbedder
         public RadioButton RbApiButton;
         public ComboBox CmbGroups;
         public ComboBox CmbReports;
+        public ComboBox CmbPages;
 
         public TextBox TbGroup;
         public TextBox TbReport;
+        public TextBox TbPage;
 
         private readonly AzureLoginDialog _azureLogin;
 
@@ -95,9 +97,11 @@ namespace Fic.XTB.PowerBiEmbedder
             RbApiButton = rbApi;
             CmbGroups = cbGroup;
             CmbReports = cbReport;
+            CmbPages = cbPage;
 
             TbReport = tbReportId;
             TbGroup = tbGrpId;
+            TbPage = tbPbiPage;
 
             tbGrpId.Text = "00000000-0000-0000-0000-000000000000";
             tbReportId.Text = "00000000-0000-0000-0000-000000000000";
@@ -250,6 +254,7 @@ namespace Fic.XTB.PowerBiEmbedder
             var powerBiGroupId = tbGrpId.Text == "" ? "00000000-0000-0000-0000-000000000000" : tbGrpId.Text;
             var powerBiReportId = tbReportId.Text;
             var reportUrl = tbPbiUrl.Text == "" ? "https://app.powerbi.com" : tbPbiUrl.Text;
+            var reportPageFilter  = tbPbiPage.Text != "" ? $"&amp;pageName={tbPbiPage.Text}" : "";
 
             var filterString = "";
             if(cbxPbiFilter.Checked) {
@@ -281,7 +286,7 @@ namespace Fic.XTB.PowerBiEmbedder
                                     "<parameters>" +
                                         $"<PowerBIGroupId>{powerBiGroupId}</PowerBIGroupId>" +
                                         $"<PowerBIReportId>{powerBiReportId}</PowerBIReportId>" +
-                                        $"<TileUrl>{reportUrl}/reportEmbed?reportId={powerBiReportId}</TileUrl>" +
+                                        $"<TileUrl>{reportUrl}/reportEmbed?reportId={powerBiReportId}{reportPageFilter}</TileUrl>" +
                                         $"{filterString}"+
                                     "</parameters>" +
                                 "</control>" +
@@ -462,8 +467,9 @@ namespace Fic.XTB.PowerBiEmbedder
             if(powerBiControl != null) {
                 tbGrpId.Text = powerBiControl.Parameters.PowerBIGroupId.ToUpper();
                 tbReportId.Text = powerBiControl.Parameters.PowerBIReportId.ToUpper();
+                tbPbiPage.Text = powerBiControl.Parameters.TileUrl.Split(new[] { "&pageName=" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
 
-                InitializeDropdowns(tbGrpId.Text, tbReportId.Text);
+                InitializeDropdowns(tbGrpId.Text, tbReportId.Text, tbPbiPage.Text);
 
                 tbPbiUrl.Text = powerBiControl.Parameters.TileUrl.Split(new []{ "/reportEmbed" },StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
                 cbxPbiFilter.Checked = powerBiControl.Parameters.PowerBIFilter != null;
@@ -492,7 +498,10 @@ namespace Fic.XTB.PowerBiEmbedder
                 tbReportId.Text = "00000000-0000-0000-0000-000000000000";
                 cbReport.SelectedItem = null;
 
-                tbPbiUrl.Text = "https://app.powerbi.com";
+                tbPbiPage.Text = "";
+                cbPage.SelectedItem = null;
+        
+                tbPbiUrl.Text = "https://app.powerbi.com";                
                 cbxPbiFilter.Checked = false;
 
                 tbPbiTable.Text = "";
@@ -601,6 +610,7 @@ namespace Fic.XTB.PowerBiEmbedder
 
                 cbGroup.Visible = true;
                 cbReport.Visible = true;
+                cbPage.Visible = true;
             }
 
             if(rbManual.Checked) {
@@ -610,6 +620,8 @@ namespace Fic.XTB.PowerBiEmbedder
 
                 cbGroup.Visible = false;
                 cbReport.Visible = false;
+                cbPage.Visible = false;
+
             }
         }
 
@@ -637,6 +649,18 @@ namespace Fic.XTB.PowerBiEmbedder
 
             tbPbiUrl.Text = selectedReport.EmbedUrl.Split(new[] { "/reportEmbed" }, StringSplitOptions.None).FirstOrDefault();
             tbReportId.Text = selectedReport.Id;
+            tbPbiPage.Text = "";
+
+
+            cbPage.Items.Clear();
+            foreach (var page in selectedReport.Pages){
+                var pageProxy = new PageProxy
+                {
+                    Text = page.DisplayName,
+                    Value = page
+                };
+                cbPage.Items.Add(pageProxy);
+            }
         }
 
         private void cbGroup_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -665,7 +689,7 @@ namespace Fic.XTB.PowerBiEmbedder
             }
         }
 
-        public void InitializeDropdowns(string groupId, string reportId) {
+        public void InitializeDropdowns(string groupId, string reportId, string pageName) {
             if(cbGroup.Items.Count == 0) { return;}
             foreach (GroupProxy group in cbGroup.Items)
             {
@@ -688,8 +712,25 @@ namespace Fic.XTB.PowerBiEmbedder
             foreach (ReportProxy report in cbReport.Items)
             {
                 if (report.Value.Id.ToUpper() != reportId.ToUpper()) continue;
-                cbReport.SelectedItem = report;
+                cbReport.SelectedItem = report;           
 
+                cbPage.Items.Clear();
+                foreach (var page in report.Value.Pages)
+                {
+                    var pageProxy = new PageProxy
+                    {
+                        Text = page.DisplayName,
+                        Value = page
+                    };
+                    cbPage.Items.Add(pageProxy);
+                }
+                break;
+            }
+
+            foreach(PageProxy page in cbPage.Items) {
+                if (page.Value.Name != pageName) continue;
+
+                cbPage.SelectedItem = page;
                 break;
             }
         }
@@ -705,6 +746,15 @@ namespace Fic.XTB.PowerBiEmbedder
                 gbPowerBiConfig.Text = @"Power BI Config";
                 lblSection.Text = @"Section";
             }
+        }
+
+        private void cbPage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbPage.SelectedItem == null) { return; }
+            var selectedPage = ((PageProxy)cbPage.SelectedItem).Value;
+
+            tbPbiPage.Text = selectedPage.Name;
+
         }
     }
 }

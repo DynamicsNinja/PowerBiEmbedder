@@ -1,4 +1,6 @@
-﻿namespace Fic.XTB.PowerBiEmbedder.Model
+﻿using System.Collections.Generic;
+
+namespace Fic.XTB.PowerBiEmbedder.Model
 {
     public class PbiReport
     {
@@ -6,5 +8,6 @@
         public string Name { get; set; }
         public string WebUrl { get; set; }
         public string EmbedUrl { get; set; }    
+        public List<PbiPage> Pages { get; set; }
     }
 }

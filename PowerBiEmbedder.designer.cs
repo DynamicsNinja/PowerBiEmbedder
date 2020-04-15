@@ -52,6 +52,9 @@
             this.cmbEntity = new System.Windows.Forms.ComboBox();
             this.lblEntity = new System.Windows.Forms.Label();
             this.gbPowerBiConfig = new System.Windows.Forms.GroupBox();
+            this.cbPage = new System.Windows.Forms.ComboBox();
+            this.tbPbiPage = new System.Windows.Forms.TextBox();
+            this.lblPage = new System.Windows.Forms.Label();
             this.cbReport = new System.Windows.Forms.ComboBox();
             this.cbGroup = new System.Windows.Forms.ComboBox();
             this.pMethod = new System.Windows.Forms.Panel();
@@ -184,9 +187,9 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 34);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(962, 485);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(962, 577);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // gbTarget
@@ -207,7 +210,7 @@
             this.gbTarget.Enabled = false;
             this.gbTarget.Location = new System.Drawing.Point(3, 3);
             this.gbTarget.Name = "gbTarget";
-            this.gbTarget.Size = new System.Drawing.Size(475, 285);
+            this.gbTarget.Size = new System.Drawing.Size(475, 322);
             this.gbTarget.TabIndex = 24;
             this.gbTarget.TabStop = false;
             this.gbTarget.Text = "Target";
@@ -328,6 +331,9 @@
             this.gbPowerBiConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbPowerBiConfig.Controls.Add(this.cbPage);
+            this.gbPowerBiConfig.Controls.Add(this.tbPbiPage);
+            this.gbPowerBiConfig.Controls.Add(this.lblPage);
             this.gbPowerBiConfig.Controls.Add(this.cbReport);
             this.gbPowerBiConfig.Controls.Add(this.cbGroup);
             this.gbPowerBiConfig.Controls.Add(this.pMethod);
@@ -343,10 +349,41 @@
             this.gbPowerBiConfig.Enabled = false;
             this.gbPowerBiConfig.Location = new System.Drawing.Point(484, 3);
             this.gbPowerBiConfig.Name = "gbPowerBiConfig";
-            this.gbPowerBiConfig.Size = new System.Drawing.Size(475, 285);
+            this.gbPowerBiConfig.Size = new System.Drawing.Size(475, 322);
             this.gbPowerBiConfig.TabIndex = 25;
             this.gbPowerBiConfig.TabStop = false;
             this.gbPowerBiConfig.Text = "Power BI Config 🔗";
+            // 
+            // cbPage
+            // 
+            this.cbPage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbPage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPage.FormattingEnabled = true;
+            this.cbPage.Location = new System.Drawing.Point(92, 181);
+            this.cbPage.Name = "cbPage";
+            this.cbPage.Size = new System.Drawing.Size(342, 24);
+            this.cbPage.TabIndex = 31;
+            this.cbPage.Visible = false;
+            this.cbPage.SelectedIndexChanged += new System.EventHandler(this.cbPage_SelectedIndexChanged);
+            // 
+            // tbPbiPage
+            // 
+            this.tbPbiPage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbPbiPage.Location = new System.Drawing.Point(92, 181);
+            this.tbPbiPage.Name = "tbPbiPage";
+            this.tbPbiPage.Size = new System.Drawing.Size(342, 22);
+            this.tbPbiPage.TabIndex = 30;
+            // 
+            // lblPage
+            // 
+            this.lblPage.AutoSize = true;
+            this.lblPage.Location = new System.Drawing.Point(6, 184);
+            this.lblPage.Name = "lblPage";
+            this.lblPage.Size = new System.Drawing.Size(41, 17);
+            this.lblPage.TabIndex = 29;
+            this.lblPage.Text = "Page";
             // 
             // cbReport
             // 
@@ -422,7 +459,7 @@
             // 
             this.tbPbiUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbPbiUrl.Location = new System.Drawing.Point(92, 184);
+            this.tbPbiUrl.Location = new System.Drawing.Point(92, 231);
             this.tbPbiUrl.Name = "tbPbiUrl";
             this.tbPbiUrl.Size = new System.Drawing.Size(342, 22);
             this.tbPbiUrl.TabIndex = 23;
@@ -430,7 +467,7 @@
             // lblPbiUrl
             // 
             this.lblPbiUrl.AutoSize = true;
-            this.lblPbiUrl.Location = new System.Drawing.Point(6, 187);
+            this.lblPbiUrl.Location = new System.Drawing.Point(6, 234);
             this.lblPbiUrl.Name = "lblPbiUrl";
             this.lblPbiUrl.Size = new System.Drawing.Size(36, 17);
             this.lblPbiUrl.TabIndex = 22;
@@ -439,7 +476,7 @@
             // cbxPbiFilter
             // 
             this.cbxPbiFilter.AutoSize = true;
-            this.cbxPbiFilter.Location = new System.Drawing.Point(92, 236);
+            this.cbxPbiFilter.Location = new System.Drawing.Point(92, 280);
             this.cbxPbiFilter.Name = "cbxPbiFilter";
             this.cbxPbiFilter.Size = new System.Drawing.Size(18, 17);
             this.cbxPbiFilter.TabIndex = 21;
@@ -449,7 +486,7 @@
             // lblPbiFilter
             // 
             this.lblPbiFilter.AutoSize = true;
-            this.lblPbiFilter.Location = new System.Drawing.Point(6, 235);
+            this.lblPbiFilter.Location = new System.Drawing.Point(6, 279);
             this.lblPbiFilter.Name = "lblPbiFilter";
             this.lblPbiFilter.Size = new System.Drawing.Size(39, 17);
             this.lblPbiFilter.TabIndex = 21;
@@ -503,9 +540,9 @@
             this.gbFormatting.Controls.Add(this.tbSectionName);
             this.gbFormatting.Controls.Add(this.tbRowspan);
             this.gbFormatting.Enabled = false;
-            this.gbFormatting.Location = new System.Drawing.Point(3, 294);
+            this.gbFormatting.Location = new System.Drawing.Point(3, 331);
             this.gbFormatting.Name = "gbFormatting";
-            this.gbFormatting.Size = new System.Drawing.Size(475, 188);
+            this.gbFormatting.Size = new System.Drawing.Size(475, 243);
             this.gbFormatting.TabIndex = 27;
             this.gbFormatting.TabStop = false;
             this.gbFormatting.Text = "Formatting";
@@ -561,9 +598,9 @@
             this.gbPbiFilters.Controls.Add(this.tbPbiTable);
             this.gbPbiFilters.Controls.Add(this.tbPbiColumn);
             this.gbPbiFilters.Enabled = false;
-            this.gbPbiFilters.Location = new System.Drawing.Point(484, 294);
+            this.gbPbiFilters.Location = new System.Drawing.Point(484, 331);
             this.gbPbiFilters.Name = "gbPbiFilters";
-            this.gbPbiFilters.Size = new System.Drawing.Size(475, 188);
+            this.gbPbiFilters.Size = new System.Drawing.Size(475, 243);
             this.gbPbiFilters.TabIndex = 26;
             this.gbPbiFilters.TabStop = false;
             this.gbPbiFilters.Text = "FIlter 🔗";
@@ -637,7 +674,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(968, 513);
             this.Name = "PowerBiEmbedder";
-            this.Size = new System.Drawing.Size(968, 513);
+            this.Size = new System.Drawing.Size(968, 605);
             this.ConnectionUpdated += new XrmToolBox.Extensibility.PluginControlBase.ConnectionUpdatedHandler(this.PowerBiEmbedder_ConnectionUpdated);
             this.Load += new System.EventHandler(this.MyPluginControl_Load);
             this.toolStripMenu.ResumeLayout(false);
@@ -709,5 +746,8 @@
         private System.Windows.Forms.CheckBox cbxLinkValues;
         private System.Windows.Forms.Label lblLinkValues;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.TextBox tbPbiPage;
+        private System.Windows.Forms.Label lblPage;
+        private System.Windows.Forms.ComboBox cbPage;
     }
 }

@@ -74,7 +74,7 @@ namespace Fic.XTB.PowerBiEmbedder
                             _pbe.PbiGroups = groups;
 
                             PopulateGroupsDropdown();
-                            _pbe.InitializeDropdowns(_pbe.TbGroup.Text, _pbe.TbReport.Text);
+                            _pbe.InitializeDropdowns(_pbe.TbGroup.Text, _pbe.TbReport.Text, _pbe.TbPage.Text);
 
                             _pbe.RbApiButton.Enabled = true;
 
@@ -109,7 +109,8 @@ namespace Fic.XTB.PowerBiEmbedder
         private void PopulateGroupsDropdown()
         {
             _pbe.CmbGroups.Items.Clear();
-            _pbe.CmbReports.Items.Clear();
+            _pbe.CmbReports.Items.Clear();   
+            _pbe.CmbPages.Items.Clear();
 
             foreach (var group in _pbe.PbiGroups)
             {

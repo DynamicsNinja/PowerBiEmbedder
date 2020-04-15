@@ -64,6 +64,11 @@ namespace Fic.XTB.PowerBiEmbedder.Helper
 
             var pbiGroupsResponse = JsonConvert.DeserializeObject<PbiReportsResponse>(jsonResponse);
 
+            foreach (var report in pbiGroupsResponse.Reports){
+                var pages = GetReportPages(report.Id);
+                report.Pages = pages;
+            }
+
             return pbiGroupsResponse.Reports;
         }
 
@@ -76,7 +81,33 @@ namespace Fic.XTB.PowerBiEmbedder.Helper
 
             var reports = JsonConvert.DeserializeObject<PbiReportsResponse>(jsonResponse);
 
+            foreach (var report in reports.Reports)
+            {
+                var pages = GetReportPages(groupId,report.Id);
+                report.Pages = pages;
+            }
+
             return reports.Reports.OrderBy(r => r.Name).ToList();
+        }
+
+        public List<PbiPage> GetReportPages(string reportId) {
+            var response = _client.GetAsync($"https://api.powerbi.com/v1.0/myorg/reports/{reportId}/pages").GetAwaiter().GetResult();
+            if (!response.IsSuccessStatusCode) { throw new Exception($"Fetching report pages resulted as {response.ReasonPhrase}"); }
+            var jsonResponse = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+            var pages = JsonConvert.DeserializeObject<PbiPagesResponse>(jsonResponse).Pages;
+
+            return pages;
+        }
+
+        public List<PbiPage> GetReportPages(string groupId,string reportId){
+            var response = _client.GetAsync($"https://api.powerbi.com/v1.0/myorg/groups/{groupId}/reports/{reportId}/pages").GetAwaiter().GetResult();
+            if (!response.IsSuccessStatusCode) { throw new Exception($"Fetching report pages resulted as {response.ReasonPhrase}"); }
+            var jsonResponse = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+            var pages = JsonConvert.DeserializeObject<PbiPagesResponse>(jsonResponse).Pages;
+
+            return pages;
         }
 
         public void GetClient()

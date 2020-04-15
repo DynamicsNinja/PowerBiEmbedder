@@ -138,6 +138,8 @@
     <Compile Include="Model\PbiFilter.cs" />
     <Compile Include="Model\PbiGroup.cs" />
     <Compile Include="Model\PbiGroupsResponse.cs" />
+    <Compile Include="Model\PbiPage.cs" />
+    <Compile Include="Model\PbiPagesResponse.cs" />
     <Compile Include="Model\PbiReport.cs" />
     <Compile Include="Model\PbiReportsResponse.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -158,6 +160,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proxy\GroupProxy.cs" />
+    <Compile Include="Proxy\PageProxy.cs" />
     <Compile Include="Proxy\ReportProxy.cs" />
     <Compile Include="Proxy\SectionProxy.cs" />
     <Compile Include="Settings.cs" />
