@@ -629,10 +629,14 @@ namespace Fic.XTB.PowerBiEmbedder
             if(cbGroup.SelectedItem == null) { return;}
             var selectedGroup = ((GroupProxy)cbGroup.SelectedItem).Value;
             tbGrpId.Text = selectedGroup.Id;
-            tbReportId.Text = "";
+            
+            cbPage.Items.Clear();
+            tbPbiPage.Text = "";
 
             cbReport.Items.Clear();
-            foreach(var report in selectedGroup.Reports) {
+            tbReportId.Text = "";
+
+            foreach (var report in selectedGroup.Reports) {
                 var reportProxy = new ReportProxy
                 {
                     Text = report.Name,
@@ -649,10 +653,10 @@ namespace Fic.XTB.PowerBiEmbedder
 
             tbPbiUrl.Text = selectedReport.EmbedUrl.Split(new[] { "/reportEmbed" }, StringSplitOptions.None).FirstOrDefault();
             tbReportId.Text = selectedReport.Id;
+
             tbPbiPage.Text = "";
-
-
             cbPage.Items.Clear();
+
             foreach (var page in selectedReport.Pages){
                 var pageProxy = new PageProxy
                 {
