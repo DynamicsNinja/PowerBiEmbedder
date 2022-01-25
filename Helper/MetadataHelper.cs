@@ -6,10 +6,10 @@ using Microsoft.Xrm.Sdk.Metadata.Query;
 namespace Fic.XTB.PowerBiEmbedder.Helper
 {
     public static class MetadataHelper
-    {  
+    {
         public static String[] attributeProperties = { "DisplayName", "Description", "AttributeType", "IsManaged", "IsCustomizable", "IsCustomAttribute", "IsValidForCreate", "IsPrimaryName", "SchemaName", "AutoNumberFormat", "MaxLength" };
         public static String[] entityDetails = { "Attributes" };
-        public static String[] entityProperties = { "LogicalName", "DisplayName", "PrimaryNameAttribute", "ObjectTypeCode", "IsManaged", "IsCustomizable", "IsCustomEntity", "IsIntersect", "IsValidForAdvancedFind" };
+        public static String[] entityProperties = { "LogicalName", "DisplayName", "DisplayCollectionName", "PrimaryNameAttribute", "ObjectTypeCode", "IsManaged", "IsCustomizable", "IsCustomEntity", "IsIntersect", "IsValidForAdvancedFind" };
 
         public static RetrieveMetadataChangesResponse LoadEntities(IOrganizationService service)
         {

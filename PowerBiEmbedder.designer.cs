@@ -35,6 +35,7 @@
             this.tssSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnPublish = new System.Windows.Forms.ToolStripButton();
             this.btnConnect = new System.Windows.Forms.ToolStripButton();
+            this.tsbPreview = new System.Windows.Forms.ToolStripButton();
             this.tsSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.lblPbiSettings = new System.Windows.Forms.ToolStripLabel();
             this.cmbPbiSettings = new System.Windows.Forms.ToolStripComboBox();
@@ -100,13 +101,13 @@
             this.tssSeparator1,
             this.btnPublish,
             this.btnConnect,
+            this.tsbPreview,
             this.tsSeparator1,
             this.lblPbiSettings,
             this.cmbPbiSettings});
             this.toolStripMenu.Location = new System.Drawing.Point(0, 0);
             this.toolStripMenu.Name = "toolStripMenu";
-            this.toolStripMenu.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.toolStripMenu.Size = new System.Drawing.Size(968, 31);
+            this.toolStripMenu.Size = new System.Drawing.Size(1089, 34);
             this.toolStripMenu.TabIndex = 4;
             this.toolStripMenu.Text = "toolStrip1";
             // 
@@ -115,14 +116,14 @@
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
             this.btnClose.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(73, 28);
+            this.btnClose.Size = new System.Drawing.Size(83, 29);
             this.btnClose.Text = "Close";
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // tssSeparator1
             // 
             this.tssSeparator1.Name = "tssSeparator1";
-            this.tssSeparator1.Size = new System.Drawing.Size(6, 31);
+            this.tssSeparator1.Size = new System.Drawing.Size(6, 34);
             // 
             // btnPublish
             // 
@@ -130,7 +131,7 @@
             this.btnPublish.Image = ((System.Drawing.Image)(resources.GetObject("btnPublish.Image")));
             this.btnPublish.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnPublish.Name = "btnPublish";
-            this.btnPublish.Size = new System.Drawing.Size(133, 28);
+            this.btnPublish.Size = new System.Drawing.Size(155, 29);
             this.btnPublish.Text = "Publish Report";
             this.btnPublish.Click += new System.EventHandler(this.btnPublish_Click);
             // 
@@ -140,30 +141,40 @@
             this.btnConnect.Image = ((System.Drawing.Image)(resources.GetObject("btnConnect.Image")));
             this.btnConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(134, 28);
+            this.btnConnect.Size = new System.Drawing.Size(157, 29);
             this.btnConnect.Text = "Connect to PBI";
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            // 
+            // tsbPreview
+            // 
+            this.tsbPreview.Image = ((System.Drawing.Image)(resources.GetObject("tsbPreview.Image")));
+            this.tsbPreview.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbPreview.Name = "tsbPreview";
+            this.tsbPreview.Size = new System.Drawing.Size(100, 29);
+            this.tsbPreview.Text = "Preview";
+            this.tsbPreview.Click += new System.EventHandler(this.tsbPreview_Click);
             // 
             // tsSeparator1
             // 
             this.tsSeparator1.Name = "tsSeparator1";
-            this.tsSeparator1.Size = new System.Drawing.Size(6, 31);
+            this.tsSeparator1.Size = new System.Drawing.Size(6, 34);
             // 
             // lblPbiSettings
             // 
             this.lblPbiSettings.Name = "lblPbiSettings";
-            this.lblPbiSettings.Size = new System.Drawing.Size(168, 28);
+            this.lblPbiSettings.Size = new System.Drawing.Size(202, 29);
             this.lblPbiSettings.Text = "Embed Power BI Setting";
             // 
             // cmbPbiSettings
             // 
             this.cmbPbiSettings.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPbiSettings.Enabled = false;
+            this.cmbPbiSettings.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cmbPbiSettings.Items.AddRange(new object[] {
             "On",
             "Off"});
             this.cmbPbiSettings.Name = "cmbPbiSettings";
-            this.cmbPbiSettings.Size = new System.Drawing.Size(121, 31);
+            this.cmbPbiSettings.Size = new System.Drawing.Size(136, 34);
             this.cmbPbiSettings.SelectedIndexChanged += new System.EventHandler(this.cmbPbiSettings_Change);
             // 
             // errorProvider
@@ -184,12 +195,13 @@
             this.tableLayoutPanel1.Controls.Add(this.gbPowerBiConfig, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.gbFormatting, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.gbPbiFilters, 1, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 34);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 42);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(962, 577);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1082, 722);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // gbTarget
@@ -208,9 +220,11 @@
             this.gbTarget.Controls.Add(this.cmbEntity);
             this.gbTarget.Controls.Add(this.lblEntity);
             this.gbTarget.Enabled = false;
-            this.gbTarget.Location = new System.Drawing.Point(3, 3);
+            this.gbTarget.Location = new System.Drawing.Point(3, 4);
+            this.gbTarget.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbTarget.Name = "gbTarget";
-            this.gbTarget.Size = new System.Drawing.Size(475, 322);
+            this.gbTarget.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gbTarget.Size = new System.Drawing.Size(535, 402);
             this.gbTarget.TabIndex = 24;
             this.gbTarget.TabStop = false;
             this.gbTarget.Text = "Target";
@@ -221,9 +235,10 @@
             this.cbxLinkValues.Checked = true;
             this.cbxLinkValues.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbxLinkValues.Enabled = false;
-            this.cbxLinkValues.Location = new System.Drawing.Point(111, 236);
+            this.cbxLinkValues.Location = new System.Drawing.Point(125, 295);
+            this.cbxLinkValues.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbxLinkValues.Name = "cbxLinkValues";
-            this.cbxLinkValues.Size = new System.Drawing.Size(18, 17);
+            this.cbxLinkValues.Size = new System.Drawing.Size(22, 21);
             this.cbxLinkValues.TabIndex = 29;
             this.cbxLinkValues.UseVisualStyleBackColor = true;
             this.cbxLinkValues.CheckedChanged += new System.EventHandler(this.cbxLockConfig_CheckedChanged);
@@ -231,9 +246,9 @@
             // lblLinkValues
             // 
             this.lblLinkValues.AutoSize = true;
-            this.lblLinkValues.Location = new System.Drawing.Point(6, 234);
+            this.lblLinkValues.Location = new System.Drawing.Point(7, 292);
             this.lblLinkValues.Name = "lblLinkValues";
-            this.lblLinkValues.Size = new System.Drawing.Size(34, 17);
+            this.lblLinkValues.Size = new System.Drawing.Size(38, 20);
             this.lblLinkValues.TabIndex = 14;
             this.lblLinkValues.Text = "Link";
             this.toolTip1.SetToolTip(this.lblLinkValues, "optrbv rtv rtvetrvbwtvb tbvrgwe vtwrbev rwebv rvteqbvrw ebvw");
@@ -244,9 +259,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbSection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSection.FormattingEnabled = true;
-            this.cmbSection.Location = new System.Drawing.Point(111, 181);
+            this.cmbSection.Location = new System.Drawing.Point(125, 226);
+            this.cmbSection.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbSection.Name = "cmbSection";
-            this.cmbSection.Size = new System.Drawing.Size(322, 24);
+            this.cmbSection.Size = new System.Drawing.Size(363, 28);
             this.cmbSection.TabIndex = 13;
             this.cmbSection.SelectedIndexChanged += new System.EventHandler(this.cmbSection_SelectedIndexChanged);
             this.cmbSection.Validating += new System.ComponentModel.CancelEventHandler(this.cmbSection_Validating);
@@ -254,9 +270,9 @@
             // lblSection
             // 
             this.lblSection.AutoSize = true;
-            this.lblSection.Location = new System.Drawing.Point(6, 184);
+            this.lblSection.Location = new System.Drawing.Point(7, 230);
             this.lblSection.Name = "lblSection";
-            this.lblSection.Size = new System.Drawing.Size(55, 17);
+            this.lblSection.Size = new System.Drawing.Size(63, 20);
             this.lblSection.TabIndex = 12;
             this.lblSection.Text = "Section";
             // 
@@ -266,9 +282,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbTab.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTab.FormattingEnabled = true;
-            this.cmbTab.Location = new System.Drawing.Point(111, 133);
+            this.cmbTab.Location = new System.Drawing.Point(125, 166);
+            this.cmbTab.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbTab.Name = "cmbTab";
-            this.cmbTab.Size = new System.Drawing.Size(322, 24);
+            this.cmbTab.Size = new System.Drawing.Size(363, 28);
             this.cmbTab.TabIndex = 11;
             this.cmbTab.SelectedIndexChanged += new System.EventHandler(this.cmbTab_SelectedIndexChanged);
             this.cmbTab.Validating += new System.ComponentModel.CancelEventHandler(this.cmbTab_Validating);
@@ -276,9 +293,9 @@
             // lblTab
             // 
             this.lblTab.AutoSize = true;
-            this.lblTab.Location = new System.Drawing.Point(6, 136);
+            this.lblTab.Location = new System.Drawing.Point(7, 170);
             this.lblTab.Name = "lblTab";
-            this.lblTab.Size = new System.Drawing.Size(33, 17);
+            this.lblTab.Size = new System.Drawing.Size(36, 20);
             this.lblTab.TabIndex = 10;
             this.lblTab.Text = "Tab";
             // 
@@ -288,9 +305,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbForm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbForm.FormattingEnabled = true;
-            this.cmbForm.Location = new System.Drawing.Point(111, 82);
+            this.cmbForm.Location = new System.Drawing.Point(125, 102);
+            this.cmbForm.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbForm.Name = "cmbForm";
-            this.cmbForm.Size = new System.Drawing.Size(322, 24);
+            this.cmbForm.Size = new System.Drawing.Size(363, 28);
             this.cmbForm.TabIndex = 9;
             this.cmbForm.SelectedIndexChanged += new System.EventHandler(this.cmbForm_SelectedIndexChanged);
             this.cmbForm.Validating += new System.ComponentModel.CancelEventHandler(this.cmbForm_Validating);
@@ -298,9 +316,9 @@
             // lblForm
             // 
             this.lblForm.AutoSize = true;
-            this.lblForm.Location = new System.Drawing.Point(6, 85);
+            this.lblForm.Location = new System.Drawing.Point(7, 106);
             this.lblForm.Name = "lblForm";
-            this.lblForm.Size = new System.Drawing.Size(40, 17);
+            this.lblForm.Size = new System.Drawing.Size(46, 20);
             this.lblForm.TabIndex = 8;
             this.lblForm.Text = "Form";
             // 
@@ -310,9 +328,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbEntity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEntity.FormattingEnabled = true;
-            this.cmbEntity.Location = new System.Drawing.Point(111, 31);
+            this.cmbEntity.Location = new System.Drawing.Point(125, 39);
+            this.cmbEntity.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbEntity.Name = "cmbEntity";
-            this.cmbEntity.Size = new System.Drawing.Size(322, 24);
+            this.cmbEntity.Size = new System.Drawing.Size(363, 28);
             this.cmbEntity.TabIndex = 7;
             this.cmbEntity.SelectedIndexChanged += new System.EventHandler(this.cmbEntity_SelectedIndexChanged);
             this.cmbEntity.Validating += new System.ComponentModel.CancelEventHandler(this.cmbEntity_Validating);
@@ -320,9 +339,9 @@
             // lblEntity
             // 
             this.lblEntity.AutoSize = true;
-            this.lblEntity.Location = new System.Drawing.Point(6, 34);
+            this.lblEntity.Location = new System.Drawing.Point(7, 42);
             this.lblEntity.Name = "lblEntity";
-            this.lblEntity.Size = new System.Drawing.Size(43, 17);
+            this.lblEntity.Size = new System.Drawing.Size(49, 20);
             this.lblEntity.TabIndex = 6;
             this.lblEntity.Text = "Entity";
             // 
@@ -347,9 +366,11 @@
             this.gbPowerBiConfig.Controls.Add(this.lblReportId);
             this.gbPowerBiConfig.Controls.Add(this.lblGrpId);
             this.gbPowerBiConfig.Enabled = false;
-            this.gbPowerBiConfig.Location = new System.Drawing.Point(484, 3);
+            this.gbPowerBiConfig.Location = new System.Drawing.Point(544, 4);
+            this.gbPowerBiConfig.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbPowerBiConfig.Name = "gbPowerBiConfig";
-            this.gbPowerBiConfig.Size = new System.Drawing.Size(475, 322);
+            this.gbPowerBiConfig.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gbPowerBiConfig.Size = new System.Drawing.Size(535, 402);
             this.gbPowerBiConfig.TabIndex = 25;
             this.gbPowerBiConfig.TabStop = false;
             this.gbPowerBiConfig.Text = "Power BI Config 🔗";
@@ -360,9 +381,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbPage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPage.FormattingEnabled = true;
-            this.cbPage.Location = new System.Drawing.Point(92, 181);
+            this.cbPage.Location = new System.Drawing.Point(104, 226);
+            this.cbPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbPage.Name = "cbPage";
-            this.cbPage.Size = new System.Drawing.Size(342, 24);
+            this.cbPage.Size = new System.Drawing.Size(385, 28);
             this.cbPage.TabIndex = 31;
             this.cbPage.Visible = false;
             this.cbPage.SelectedIndexChanged += new System.EventHandler(this.cbPage_SelectedIndexChanged);
@@ -371,17 +393,18 @@
             // 
             this.tbPbiPage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbPbiPage.Location = new System.Drawing.Point(92, 181);
+            this.tbPbiPage.Location = new System.Drawing.Point(104, 226);
+            this.tbPbiPage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbPbiPage.Name = "tbPbiPage";
-            this.tbPbiPage.Size = new System.Drawing.Size(342, 22);
+            this.tbPbiPage.Size = new System.Drawing.Size(385, 26);
             this.tbPbiPage.TabIndex = 30;
             // 
             // lblPage
             // 
             this.lblPage.AutoSize = true;
-            this.lblPage.Location = new System.Drawing.Point(6, 184);
+            this.lblPage.Location = new System.Drawing.Point(7, 230);
             this.lblPage.Name = "lblPage";
-            this.lblPage.Size = new System.Drawing.Size(41, 17);
+            this.lblPage.Size = new System.Drawing.Size(46, 20);
             this.lblPage.TabIndex = 29;
             this.lblPage.Text = "Page";
             // 
@@ -391,9 +414,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbReport.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbReport.FormattingEnabled = true;
-            this.cbReport.Location = new System.Drawing.Point(92, 133);
+            this.cbReport.Location = new System.Drawing.Point(104, 166);
+            this.cbReport.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbReport.Name = "cbReport";
-            this.cbReport.Size = new System.Drawing.Size(342, 24);
+            this.cbReport.Size = new System.Drawing.Size(385, 28);
             this.cbReport.TabIndex = 28;
             this.cbReport.Visible = false;
             this.cbReport.SelectedIndexChanged += new System.EventHandler(this.cbReport_SelectedIndexChanged);
@@ -405,9 +429,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbGroup.FormattingEnabled = true;
-            this.cbGroup.Location = new System.Drawing.Point(92, 82);
+            this.cbGroup.Location = new System.Drawing.Point(104, 102);
+            this.cbGroup.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbGroup.Name = "cbGroup";
-            this.cbGroup.Size = new System.Drawing.Size(342, 24);
+            this.cbGroup.Size = new System.Drawing.Size(385, 28);
             this.cbGroup.TabIndex = 14;
             this.cbGroup.Visible = false;
             this.cbGroup.SelectedIndexChanged += new System.EventHandler(this.cbGroup_SelectedIndexChanged);
@@ -417,18 +442,20 @@
             // 
             this.pMethod.Controls.Add(this.rbManual);
             this.pMethod.Controls.Add(this.rbApi);
-            this.pMethod.Location = new System.Drawing.Point(92, 21);
+            this.pMethod.Location = new System.Drawing.Point(104, 26);
+            this.pMethod.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pMethod.Name = "pMethod";
-            this.pMethod.Size = new System.Drawing.Size(342, 40);
+            this.pMethod.Size = new System.Drawing.Size(385, 50);
             this.pMethod.TabIndex = 27;
             // 
             // rbManual
             // 
             this.rbManual.AutoSize = true;
             this.rbManual.Checked = true;
-            this.rbManual.Location = new System.Drawing.Point(3, 11);
+            this.rbManual.Location = new System.Drawing.Point(3, 14);
+            this.rbManual.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rbManual.Name = "rbManual";
-            this.rbManual.Size = new System.Drawing.Size(75, 21);
+            this.rbManual.Size = new System.Drawing.Size(86, 24);
             this.rbManual.TabIndex = 26;
             this.rbManual.TabStop = true;
             this.rbManual.Text = "Manual";
@@ -439,9 +466,10 @@
             // 
             this.rbApi.AutoSize = true;
             this.rbApi.Enabled = false;
-            this.rbApi.Location = new System.Drawing.Point(84, 11);
+            this.rbApi.Location = new System.Drawing.Point(94, 14);
+            this.rbApi.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rbApi.Name = "rbApi";
-            this.rbApi.Size = new System.Drawing.Size(109, 21);
+            this.rbApi.Size = new System.Drawing.Size(128, 24);
             this.rbApi.TabIndex = 25;
             this.rbApi.Text = "Power BI API";
             this.rbApi.UseVisualStyleBackColor = true;
@@ -449,9 +477,9 @@
             // lblMethod
             // 
             this.lblMethod.AutoSize = true;
-            this.lblMethod.Location = new System.Drawing.Point(6, 34);
+            this.lblMethod.Location = new System.Drawing.Point(7, 42);
             this.lblMethod.Name = "lblMethod";
-            this.lblMethod.Size = new System.Drawing.Size(55, 17);
+            this.lblMethod.Size = new System.Drawing.Size(63, 20);
             this.lblMethod.TabIndex = 24;
             this.lblMethod.Text = "Method";
             // 
@@ -459,26 +487,28 @@
             // 
             this.tbPbiUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbPbiUrl.Location = new System.Drawing.Point(92, 231);
+            this.tbPbiUrl.Location = new System.Drawing.Point(104, 289);
+            this.tbPbiUrl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbPbiUrl.Name = "tbPbiUrl";
-            this.tbPbiUrl.Size = new System.Drawing.Size(342, 22);
+            this.tbPbiUrl.Size = new System.Drawing.Size(385, 26);
             this.tbPbiUrl.TabIndex = 23;
             // 
             // lblPbiUrl
             // 
             this.lblPbiUrl.AutoSize = true;
-            this.lblPbiUrl.Location = new System.Drawing.Point(6, 234);
+            this.lblPbiUrl.Location = new System.Drawing.Point(7, 292);
             this.lblPbiUrl.Name = "lblPbiUrl";
-            this.lblPbiUrl.Size = new System.Drawing.Size(36, 17);
+            this.lblPbiUrl.Size = new System.Drawing.Size(42, 20);
             this.lblPbiUrl.TabIndex = 22;
             this.lblPbiUrl.Text = "URL";
             // 
             // cbxPbiFilter
             // 
             this.cbxPbiFilter.AutoSize = true;
-            this.cbxPbiFilter.Location = new System.Drawing.Point(92, 280);
+            this.cbxPbiFilter.Location = new System.Drawing.Point(104, 350);
+            this.cbxPbiFilter.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbxPbiFilter.Name = "cbxPbiFilter";
-            this.cbxPbiFilter.Size = new System.Drawing.Size(18, 17);
+            this.cbxPbiFilter.Size = new System.Drawing.Size(22, 21);
             this.cbxPbiFilter.TabIndex = 21;
             this.cbxPbiFilter.UseVisualStyleBackColor = true;
             this.cbxPbiFilter.CheckedChanged += new System.EventHandler(this.cbxPbiFilter_CheckedChanged);
@@ -486,9 +516,9 @@
             // lblPbiFilter
             // 
             this.lblPbiFilter.AutoSize = true;
-            this.lblPbiFilter.Location = new System.Drawing.Point(6, 279);
+            this.lblPbiFilter.Location = new System.Drawing.Point(7, 349);
             this.lblPbiFilter.Name = "lblPbiFilter";
-            this.lblPbiFilter.Size = new System.Drawing.Size(39, 17);
+            this.lblPbiFilter.Size = new System.Drawing.Size(44, 20);
             this.lblPbiFilter.TabIndex = 21;
             this.lblPbiFilter.Text = "Filter";
             // 
@@ -496,9 +526,10 @@
             // 
             this.tbGrpId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbGrpId.Location = new System.Drawing.Point(92, 82);
+            this.tbGrpId.Location = new System.Drawing.Point(104, 102);
+            this.tbGrpId.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbGrpId.Name = "tbGrpId";
-            this.tbGrpId.Size = new System.Drawing.Size(342, 22);
+            this.tbGrpId.Size = new System.Drawing.Size(385, 26);
             this.tbGrpId.TabIndex = 16;
             this.tbGrpId.Validating += new System.ComponentModel.CancelEventHandler(this.tbGrpId_Validating);
             // 
@@ -506,27 +537,28 @@
             // 
             this.tbReportId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbReportId.Location = new System.Drawing.Point(92, 133);
+            this.tbReportId.Location = new System.Drawing.Point(104, 166);
+            this.tbReportId.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbReportId.Name = "tbReportId";
-            this.tbReportId.Size = new System.Drawing.Size(342, 22);
+            this.tbReportId.Size = new System.Drawing.Size(385, 26);
             this.tbReportId.TabIndex = 15;
             this.tbReportId.Validating += new System.ComponentModel.CancelEventHandler(this.tbReportId_Validating);
             // 
             // lblReportId
             // 
             this.lblReportId.AutoSize = true;
-            this.lblReportId.Location = new System.Drawing.Point(6, 136);
+            this.lblReportId.Location = new System.Drawing.Point(7, 170);
             this.lblReportId.Name = "lblReportId";
-            this.lblReportId.Size = new System.Drawing.Size(68, 17);
+            this.lblReportId.Size = new System.Drawing.Size(79, 20);
             this.lblReportId.TabIndex = 8;
             this.lblReportId.Text = "Report ID";
             // 
             // lblGrpId
             // 
             this.lblGrpId.AutoSize = true;
-            this.lblGrpId.Location = new System.Drawing.Point(6, 85);
+            this.lblGrpId.Location = new System.Drawing.Point(7, 106);
             this.lblGrpId.Name = "lblGrpId";
-            this.lblGrpId.Size = new System.Drawing.Size(65, 17);
+            this.lblGrpId.Size = new System.Drawing.Size(75, 20);
             this.lblGrpId.TabIndex = 6;
             this.lblGrpId.Text = "Group ID";
             // 
@@ -540,9 +572,11 @@
             this.gbFormatting.Controls.Add(this.tbSectionName);
             this.gbFormatting.Controls.Add(this.tbRowspan);
             this.gbFormatting.Enabled = false;
-            this.gbFormatting.Location = new System.Drawing.Point(3, 331);
+            this.gbFormatting.Location = new System.Drawing.Point(3, 414);
+            this.gbFormatting.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbFormatting.Name = "gbFormatting";
-            this.gbFormatting.Size = new System.Drawing.Size(475, 243);
+            this.gbFormatting.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gbFormatting.Size = new System.Drawing.Size(535, 304);
             this.gbFormatting.TabIndex = 27;
             this.gbFormatting.TabStop = false;
             this.gbFormatting.Text = "Formatting";
@@ -550,18 +584,18 @@
             // lblRowspan
             // 
             this.lblRowspan.AutoSize = true;
-            this.lblRowspan.Location = new System.Drawing.Point(6, 86);
+            this.lblRowspan.Location = new System.Drawing.Point(7, 108);
             this.lblRowspan.Name = "lblRowspan";
-            this.lblRowspan.Size = new System.Drawing.Size(66, 17);
+            this.lblRowspan.Size = new System.Drawing.Size(76, 20);
             this.lblRowspan.TabIndex = 12;
             this.lblRowspan.Text = "Rowspan";
             // 
             // lblSectionName
             // 
             this.lblSectionName.AutoSize = true;
-            this.lblSectionName.Location = new System.Drawing.Point(6, 38);
+            this.lblSectionName.Location = new System.Drawing.Point(7, 48);
             this.lblSectionName.Name = "lblSectionName";
-            this.lblSectionName.Size = new System.Drawing.Size(96, 17);
+            this.lblSectionName.Size = new System.Drawing.Size(109, 20);
             this.lblSectionName.TabIndex = 10;
             this.lblSectionName.Text = "Section Name";
             // 
@@ -569,9 +603,10 @@
             // 
             this.tbSectionName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbSectionName.Location = new System.Drawing.Point(108, 35);
+            this.tbSectionName.Location = new System.Drawing.Point(122, 44);
+            this.tbSectionName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbSectionName.Name = "tbSectionName";
-            this.tbSectionName.Size = new System.Drawing.Size(322, 22);
+            this.tbSectionName.Size = new System.Drawing.Size(363, 26);
             this.tbSectionName.TabIndex = 17;
             this.tbSectionName.Validating += new System.ComponentModel.CancelEventHandler(this.tbSectionName_Validating);
             // 
@@ -579,9 +614,10 @@
             // 
             this.tbRowspan.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbRowspan.Location = new System.Drawing.Point(108, 83);
+            this.tbRowspan.Location = new System.Drawing.Point(122, 104);
+            this.tbRowspan.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbRowspan.Name = "tbRowspan";
-            this.tbRowspan.Size = new System.Drawing.Size(322, 22);
+            this.tbRowspan.Size = new System.Drawing.Size(363, 26);
             this.tbRowspan.TabIndex = 18;
             this.tbRowspan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbRowspan_KeyPress);
             this.tbRowspan.Validating += new System.ComponentModel.CancelEventHandler(this.tbRowspan_Validating);
@@ -598,9 +634,11 @@
             this.gbPbiFilters.Controls.Add(this.tbPbiTable);
             this.gbPbiFilters.Controls.Add(this.tbPbiColumn);
             this.gbPbiFilters.Enabled = false;
-            this.gbPbiFilters.Location = new System.Drawing.Point(484, 331);
+            this.gbPbiFilters.Location = new System.Drawing.Point(544, 414);
+            this.gbPbiFilters.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbPbiFilters.Name = "gbPbiFilters";
-            this.gbPbiFilters.Size = new System.Drawing.Size(475, 243);
+            this.gbPbiFilters.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gbPbiFilters.Size = new System.Drawing.Size(535, 304);
             this.gbPbiFilters.TabIndex = 26;
             this.gbPbiFilters.TabStop = false;
             this.gbPbiFilters.Text = "FIlter 🔗";
@@ -611,36 +649,38 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbEntityField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEntityField.FormattingEnabled = true;
-            this.cmbEntityField.Location = new System.Drawing.Point(92, 127);
+            this.cmbEntityField.Location = new System.Drawing.Point(104, 159);
+            this.cmbEntityField.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbEntityField.Name = "cmbEntityField";
-            this.cmbEntityField.Size = new System.Drawing.Size(338, 24);
+            this.cmbEntityField.Size = new System.Drawing.Size(381, 28);
             this.cmbEntityField.TabIndex = 14;
+            this.cmbEntityField.SelectedIndexChanged += new System.EventHandler(this.cmbEntityField_SelectedIndexChanged);
             this.cmbEntityField.Validating += new System.ComponentModel.CancelEventHandler(this.cmbEntityField_Validating);
             // 
             // lblCdsField
             // 
             this.lblCdsField.AutoSize = true;
-            this.lblCdsField.Location = new System.Drawing.Point(6, 130);
+            this.lblCdsField.Location = new System.Drawing.Point(7, 162);
             this.lblCdsField.Name = "lblCdsField";
-            this.lblCdsField.Size = new System.Drawing.Size(70, 17);
+            this.lblCdsField.Size = new System.Drawing.Size(81, 20);
             this.lblCdsField.TabIndex = 19;
             this.lblCdsField.Text = "CDS Field";
             // 
             // lblPbiColumn
             // 
             this.lblPbiColumn.AutoSize = true;
-            this.lblPbiColumn.Location = new System.Drawing.Point(6, 86);
+            this.lblPbiColumn.Location = new System.Drawing.Point(7, 108);
             this.lblPbiColumn.Name = "lblPbiColumn";
-            this.lblPbiColumn.Size = new System.Drawing.Size(80, 17);
+            this.lblPbiColumn.Size = new System.Drawing.Size(93, 20);
             this.lblPbiColumn.TabIndex = 12;
             this.lblPbiColumn.Text = "PBI Column";
             // 
             // lblPbiTable
             // 
             this.lblPbiTable.AutoSize = true;
-            this.lblPbiTable.Location = new System.Drawing.Point(6, 38);
+            this.lblPbiTable.Location = new System.Drawing.Point(7, 48);
             this.lblPbiTable.Name = "lblPbiTable";
-            this.lblPbiTable.Size = new System.Drawing.Size(69, 17);
+            this.lblPbiTable.Size = new System.Drawing.Size(78, 20);
             this.lblPbiTable.TabIndex = 10;
             this.lblPbiTable.Text = "PBI Table";
             // 
@@ -648,9 +688,10 @@
             // 
             this.tbPbiTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbPbiTable.Location = new System.Drawing.Point(92, 35);
+            this.tbPbiTable.Location = new System.Drawing.Point(104, 44);
+            this.tbPbiTable.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbPbiTable.Name = "tbPbiTable";
-            this.tbPbiTable.Size = new System.Drawing.Size(342, 22);
+            this.tbPbiTable.Size = new System.Drawing.Size(385, 26);
             this.tbPbiTable.TabIndex = 17;
             this.tbPbiTable.Validating += new System.ComponentModel.CancelEventHandler(this.tbPbiTable_Validating);
             // 
@@ -658,23 +699,24 @@
             // 
             this.tbPbiColumn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbPbiColumn.Location = new System.Drawing.Point(92, 83);
+            this.tbPbiColumn.Location = new System.Drawing.Point(104, 104);
+            this.tbPbiColumn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbPbiColumn.Name = "tbPbiColumn";
-            this.tbPbiColumn.Size = new System.Drawing.Size(342, 22);
+            this.tbPbiColumn.Size = new System.Drawing.Size(385, 26);
             this.tbPbiColumn.TabIndex = 18;
             this.tbPbiColumn.Validating += new System.ComponentModel.CancelEventHandler(this.tbPbiColumn_Validating);
             // 
             // PowerBiEmbedder
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.toolStripMenu);
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(968, 513);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MinimumSize = new System.Drawing.Size(1089, 641);
             this.Name = "PowerBiEmbedder";
-            this.Size = new System.Drawing.Size(968, 605);
+            this.Size = new System.Drawing.Size(1089, 756);
             this.ConnectionUpdated += new XrmToolBox.Extensibility.PluginControlBase.ConnectionUpdatedHandler(this.PowerBiEmbedder_ConnectionUpdated);
             this.Load += new System.EventHandler(this.MyPluginControl_Load);
             this.toolStripMenu.ResumeLayout(false);
@@ -749,5 +791,6 @@
         private System.Windows.Forms.TextBox tbPbiPage;
         private System.Windows.Forms.Label lblPage;
         private System.Windows.Forms.ComboBox cbPage;
+        private System.Windows.Forms.ToolStripButton tsbPreview;
     }
 }

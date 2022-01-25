@@ -10,7 +10,7 @@ using XrmToolBox.Extensibility;
 
 namespace Fic.XTB.PowerBiEmbedder
 {
-    public partial class AzureLoginDialog : Form
+    public partial class AzureLoginDialog : System.Windows.Forms.Form
     {
         private readonly PowerBiEmbedder _pbe;
 
